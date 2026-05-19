@@ -619,6 +619,30 @@ body{
   </div>
 </section>
 
+  <section class="section whatis-sec">
+  <div class="section-inner">
+    <div class="whatis-layout">
+      <div class="whatis-img-area reveal left rd1" style="display:flex;justify-content:center;">
+        <div class="creator-frame">
+          <div class="frame-ring"></div>
+          
+          <img src="img/Monica-Supernova.png" alt="Tu Foto Profesional" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:2;">
+          
+          </div>
+      </div>
+      <div class="whatis-text">
+        <span class="s-label reveal">El taller</span>
+        <h2 class="s-title reveal rd1">¿Qué es<br><span class="accent">Código</span><br><span class="gold">Raíz?</span></h2>
+        <p class="whatis-desc reveal rd2">Un taller en vivo de 5 días donde vas a sanar las tres relaciones más importantes de tu vida.</p>
+        <p class="whatis-body reveal rd3">Porque cuando sanas estas tres áreas… empiezas a desbloquear tu vida completa. Esto no es solo información — es transformación real, profunda y duradera.</p>
+        <div class="reveal rd4">
+          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main">✦ QUIERO ENTRAR</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══ VIDEO ═══ -->
 <section class="video-sec section">
   <div class="section-inner" style="max-width: 960px; padding-top: clamp(20px, 3vw, 40px); padding-bottom: clamp(20px, 3vw, 40px);">
@@ -627,24 +651,29 @@ body{
       
       <div class="video-content-left-compact reveal visible">
         <span class="s-label" style="margin-bottom: 8px;">Taller en vivo • Online</span>
-        <h2 class="s-title" style="margin-bottom: 12px; font-size: clamp(32px, 5.5vw, 64px);">Mira este mensaje <span class="accent">antes de continuar</span></h2>
+
+        <h2 class="s-title" style="margin-bottom: 12px; font-size: clamp(32px, 5.5vw, 64px);">
+          Algunas decisiones tienen el poder de transformarlo todo
+        </h2>
         
         <div class="s-ornament" style="margin-bottom: 16px;">
           <span>✦</span>
         </div>
         
         <p class="video-p-main-compact">
-          Descubre en este video de 2 minutos cómo funciona la metodología de <strong>Código Raíz</strong> y por qué este momento puede cambiar tu realidad financiera, emocional y personal.
+          Cuando una mujer empieza a trabajar en su energía, su mentalidad y su historia interna, muchas cosas comienzan a cambiar a su alrededor.  
+          Este puede ser el inicio de una nueva etapa para ti.
         </p>
         
         <ul class="video-bullets-list-compact">
           <li>
             <span class="bullet-star">✦</span>
-            <p>Identifica tus patrones inconscientes de inmediato.</p>
+            <p>Conecta con una versión más consciente y poderosa de ti.</p>
           </li>
+
           <li>
             <span class="bullet-star">✦</span>
-            <p>Herramientas prácticas para activar tu prosperidad.</p>
+            <p>Empieza a romper patrones que han limitado tu crecimiento.</p>
           </li>
         </ul>
       </div>
@@ -652,7 +681,13 @@ body{
       <div class="video-frame-right-compact">
         <div class="smartphone-frame-container-compact">
           
-          <video id="videoVerticalReal" controls preload="metadata">
+          <video 
+            id="videoVerticalReal" 
+            controls 
+            preload="metadata"
+            playsinline
+            poster="https://res.cloudinary.com/dzq6yfplb/video/upload/so_1/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.jpg"
+          >
             <source src="https://res.cloudinary.com/dzq6yfplb/video/upload/q_auto/f_auto/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.mp4" type="video/mp4">
             Tu navegador no soporta video.
           </video>
@@ -663,7 +698,8 @@ body{
                 <path d="M2 2L20 13L2 24V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
               </svg>
             </div>
-            <p>Toca para reproducir mensaje</p>
+
+            <p>Reproducir video</p>
           </div>
 
         </div>
@@ -674,23 +710,22 @@ body{
   </div>
 
   <style>
-    /* ── HOJA DE ESTILOS COMPACTA AISLADA ── */
     .video-layout-split-compact {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: clamp(24px, 4vw, 45px); /* Espaciado más cerrado */
+        gap: clamp(24px, 4vw, 45px);
         text-align: left;
     }
 
     .video-content-left-compact {
         flex: 1.1;
-        max-width: 480px; /* Texto ligeramente más estrecho */
+        max-width: 480px;
     }
 
     .video-p-main-compact {
         font-family: 'DM Serif Display', serif;
-        font-size: clamp(15px, 1.9vw, 18px); /* Letra un punto más pequeña */
+        font-size: clamp(15px, 1.9vw, 18px);
         font-style: italic;
         color: #5a2535;
         line-height: 1.6;
@@ -736,29 +771,26 @@ body{
     .smartphone-frame-container-compact {
         position: relative;
         width: 100%;
-        max-width: 280px; /* Tamaño de smartphone más ajustado */
+        max-width: 280px;
         aspect-ratio: 9 / 16;
-        background: #050003;
-        border-radius: 36px;
-        box-shadow: 0 25px 60px rgba(194, 59, 110, 0.12), 
-                    0 0 0 8px #1e1e22, 
-                    0 0 0 10px rgba(212, 175, 55, 0.3);
+        border-radius: 34px;
         overflow: hidden;
+        background: #000;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.18);
     }
 
     .smartphone-frame-container-compact video {
         width: 100%;
         height: 100%;
-        object-fit: cover; 
+        object-fit: cover;
         display: block;
-        background-color: #000;
+        background: #000;
     }
-    
-    /* Control de estiramiento horizontal en pantalla completa */
-    #videoVerticalReal:fullscreen { object-fit: contain !important; background-color: #000 !important; }
-    #videoVerticalReal:-webkit-full-screen { object-fit: contain !important; background-color: #000 !important; }
-    #videoVerticalReal:-moz-full-screen { object-fit: contain !important; background-color: #000 !important; }
-    #videoVerticalReal:-ms-fullscreen { object-fit: contain !important; background-color: #000 !important; }
+
+    #videoVerticalReal:fullscreen {
+        object-fit: contain !important;
+        background-color: #000 !important;
+    }
 
     .video-overlay-custom {
         position: absolute;
@@ -767,8 +799,7 @@ body{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(145deg, rgba(26, 0, 16, 0.75), rgba(61, 0, 32, 0.85));
-        backdrop-filter: blur(3px);
+        background: rgba(0,0,0,0.15);
         cursor: pointer;
         gap: 14px;
         z-index: 10;
@@ -779,35 +810,27 @@ body{
         width: 66px;
         height: 66px;
         border-radius: 50%;
-        border: 2px solid var(--gold);
+        border: 2px solid rgba(255,255,255,0.9);
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(212, 175, 55, 0.15);
-        transition: transform 0.3s, background 0.3s;
+        background: rgba(0,0,0,0.35);
+        transition: transform 0.3s;
         position: relative;
         padding-left: 3px;
-    }
-
-    .play-ring-custom::before {
-        content: '';
-        position: absolute;
-        inset: -10px;
-        border-radius: 50%;
-        border: 1px solid rgba(212, 175, 55, 0.25);
-        animation: ring-exp 2s ease-out infinite;
+        backdrop-filter: blur(2px);
     }
 
     .video-overlay-custom:hover .play-ring-custom {
         transform: scale(1.06);
-        background: rgba(212, 175, 55, 0.25);
     }
 
     .video-overlay-custom p {
         font-family: 'DM Serif Display', serif;
         font-style: italic;
         font-size: clamp(13px, 1.6vw, 15px);
-        color: rgba(250, 218, 221, 0.85);
+        color: #fff;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.35);
     }
 
     @media (max-width: 900px) {
@@ -816,16 +839,19 @@ body{
             text-align: center;
             gap: 35px;
         }
+
         .video-content-left-compact {
             max-width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .video-bullets-list-compact li {
             text-align: left;
             justify-content: center;
         }
+
         .smartphone-frame-container-compact {
             max-width: 260px;
         }
@@ -834,94 +860,223 @@ body{
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
+
       const overlayVideo = document.getElementById('customOverlay');
       const videoElemento = document.getElementById('videoVerticalReal');
 
       if (overlayVideo && videoElemento) {
+
         overlayVideo.addEventListener('click', function() {
+
           overlayVideo.style.opacity = '0';
           overlayVideo.style.pointerEvents = 'none';
+
           videoElemento.play();
+
         });
+
+        videoElemento.addEventListener('pause', function() {
+          if (!videoElemento.ended) {
+            overlayVideo.style.opacity = '1';
+            overlayVideo.style.pointerEvents = 'all';
+          }
+        });
+
       }
+
     });
   </script>
 </section>
 
-
-<!-- ═══ DETALLES – REDISEÑO COMPLETO ═══ -->
 <section class="section details-sec">
   <div class="section-inner">
-    <span class="s-label reveal" style="color:var(--pink-deep);">Todo lo que necesitas saber</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">El <span class="accent">evento</span></h2>
+
+    <span class="s-label reveal" style="color:var(--pink-deep);">
+      Todo lo que necesitas saber
+    </span>
+
+    <h2 class="s-title reveal rd1" style="text-align:center;">
+      El <span class="accent">evento</span>
+    </h2>
 
     <div class="ev-showcase reveal rd2">
 
-      <!-- Panel izquierdo oscuro: nombre + precio -->
+      <!-- PANEL IZQUIERDO -->
       <div class="ev-left">
+
         <div class="ev-title-wrap">
           <span class="ev-eyebrow">✦ Taller en vivo ✦</span>
+
           <div class="ev-big-title">
             CÓDIGO<span>RAÍZ</span>
           </div>
-          <p class="ev-tagline">Reprograma tu vida desde la raíz y activa tu abundancia, tu amor y tu poder</p>
+
+          <p class="ev-tagline">
+            Reprograma tu vida desde la raíz y activa tu abundancia, tu amor y tu poder
+          </p>
         </div>
+
+        <!-- PRECIOS -->
         <div class="ev-price-wrap">
-          <div class="ev-price-num"><span class="ev-dollar">$</span>17</div>
-          <div class="ev-price-detail">
-            <span class="ep-label">Inversión total</span>
+
+          <div style="
+            display:flex;
+            align-items:flex-end;
+            gap:14px;
+            flex-wrap:wrap;
+          ">
+
+            <!-- PRECIO ORIGINAL -->
+            <div style="
+              font-size:62px;
+              font-weight:700;
+              line-height:1;
+              color:rgba(255,255,255,0.28);
+              position:relative;
+              letter-spacing:-2px;
+            ">
+
+              <span style="
+                position:relative;
+                display:inline-block;
+              ">
+
+                <span style="
+                  position:absolute;
+                  left:-6px;
+                  right:-6px;
+                  top:50%;
+                  height:3px;
+                  background:rgba(255,255,255,0.55);
+                  transform:rotate(-6deg);
+                  border-radius:10px;
+                "></span>
+
+                <span style="font-size:28px; vertical-align:top;">$</span>26.00
+
+              </span>
+            </div>
+
+            <!-- PRECIO ACTUAL -->
+            <div class="ev-price-num">
+              <span class="ev-dollar">$</span>17
+            </div>
+
+          </div>
+
+          <!-- TEXTO OFERTA -->
+          <div class="ev-price-detail" style="margin-top:12px;">
+            <span class="ep-label">
+              Oferta especial disponible hasta el 30 de mayo
+            </span>
+
             <span class="ep-cur">USD</span>
           </div>
+
         </div>
+
       </div>
 
-      <!-- Panel derecho claro: detalles + botón -->
+      <!-- PANEL DERECHO -->
       <div class="ev-right">
 
+        <!-- FECHA -->
         <div class="ev-row">
+
           <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
           </div>
+
           <div class="ev-row-text">
             <span class="ev-row-label">Fecha de inicio</span>
-            <span class="ev-row-value">22 de junio de 2026</span>
-            <span class="ev-row-sub">Lunes · empieza a las 7pm hora Colombia</span>
+
+            <span class="ev-row-value">
+              22 de junio de 2026
+            </span>
+
+            <span class="ev-row-sub">
+              Lunes · empieza a las 7pm hora Colombia
+            </span>
           </div>
+
         </div>
 
+        <!-- DURACIÓN -->
         <div class="ev-row">
+
           <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
           </div>
+
           <div class="ev-row-text">
             <span class="ev-row-label">Duración</span>
-            <span class="ev-row-value">5 días en vivo</span>
-            <span class="ev-row-sub">Sesiones diarias con grabación disponible</span>
+
+            <span class="ev-row-value">
+              5 días en vivo
+            </span>
+
+            <span class="ev-row-sub">
+              Sesiones diarias con grabación disponible
+            </span>
           </div>
+
         </div>
 
+        <!-- MODALIDAD -->
         <div class="ev-row">
+
           <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            <svg viewBox="0 0 24 24">
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+            </svg>
           </div>
+
           <div class="ev-row-text">
             <span class="ev-row-label">Modalidad</span>
-            <span class="ev-row-value">100% Online</span>
-            <span class="ev-row-sub">Desde donde estés, en cualquier dispositivo</span>
+
+            <span class="ev-row-value">
+              100% Online
+            </span>
+
+            <span class="ev-row-sub">
+              Desde donde estés, en cualquier dispositivo
+            </span>
           </div>
+
         </div>
 
+        <!-- BOTÓN -->
         <div class="ev-cta-wrap">
-          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main btn-gold" style="padding:16px 28px;font-size:13px;border-radius:50px;">
+
+          <a 
+            href="https://pay.hotmart.com/M105896097J" 
+            target="_blank" 
+            class="btn-main btn-gold" 
+            style="
+              padding:16px 28px;
+              font-size:13px;
+              border-radius:50px;
+            "
+          >
             ✦ QUIERO MI LUGAR · $17 USD ✦
           </a>
+
         </div>
 
-      </div><!-- /ev-right -->
-    </div><!-- /ev-showcase -->
+      </div>
+    </div>
   </div>
 </section>
-
+  
 <!-- ═══ IDENTIFICACIÓN ═══ -->
 <section class="section identify-sec">
   <div class="section-inner">
@@ -1015,29 +1170,7 @@ body{
 </section>
 
 
-<section class="section whatis-sec">
-  <div class="section-inner">
-    <div class="whatis-layout">
-      <div class="whatis-img-area reveal left rd1" style="display:flex;justify-content:center;">
-        <div class="creator-frame">
-          <div class="frame-ring"></div>
-          
-          <img src="img/Monica-Supernova.png" alt="Tu Foto Profesional" style="width:100%; height:100%; object-fit:cover; position:relative; z-index:2;">
-          
-          </div>
-      </div>
-      <div class="whatis-text">
-        <span class="s-label reveal">El taller</span>
-        <h2 class="s-title reveal rd1">¿Qué es<br><span class="accent">Código</span><br><span class="gold">Raíz?</span></h2>
-        <p class="whatis-desc reveal rd2">Un taller en vivo de 5 días donde vas a sanar las tres relaciones más importantes de tu vida.</p>
-        <p class="whatis-body reveal rd3">Porque cuando sanas estas tres áreas… empiezas a desbloquear tu vida completa. Esto no es solo información — es transformación real, profunda y duradera.</p>
-        <div class="reveal rd4">
-          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main">✦ QUIERO ENTRAR</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ═══ BENEFICIOS ═══ -->
 <section class="section benefits-sec">
@@ -1127,18 +1260,136 @@ body{
 <!-- ═══ PRECIO + CTA ═══ -->
 <section class="section price-sec">
   <div class="section-inner">
-    <span class="s-label reveal">Tu inversión</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Accede hoy</h2>
+
+    <span class="s-label reveal">
+      Tu inversión
+    </span>
+
+    <h2 class="s-title reveal rd1" style="text-align:center;">
+      Accede hoy
+    </h2>
+
     <div class="price-hero reveal rd2">
-      <p class="price-label">por solo</p>
-      <div class="price-number"><span class="dollar">$</span>17<span class="usd"> USD</span></div>
+
+      <p class="price-label">
+        Oferta especial
+      </p>
+
+      <!-- PRECIO ANTERIOR -->
+      <div style="
+        margin-top:10px;
+        text-align:center;
+      ">
+
+        <div style="
+          font-size:82px;
+          font-weight:800;
+          line-height:1;
+          color:#c06b86;
+          position:relative;
+          letter-spacing:-3px;
+          opacity:0.55;
+          display:inline-block;
+        ">
+
+          <span style="
+            position:relative;
+            display:inline-block;
+          ">
+
+            <!-- TACHADO -->
+            <span style="
+              position:absolute;
+              left:-10px;
+              right:-10px;
+              top:50%;
+              height:6px;
+              background:#ff4f7a;
+              transform:rotate(-6deg);
+              border-radius:10px;
+              box-shadow:0 0 14px rgba(255,79,122,0.45);
+            "></span>
+
+            <span style="
+              font-size:40px;
+              vertical-align:top;
+            ">
+              $
+            </span>26.00
+
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- PRECIO NUEVO -->
+      <div style="
+        margin-top:8px;
+        text-align:center;
+      ">
+
+        <div style="
+          font-size:118px;
+          font-weight:900;
+          line-height:0.9;
+          color:#111;
+          letter-spacing:-5px;
+          display:inline-block;
+        ">
+
+          <span style="
+            font-size:56px;
+            vertical-align:top;
+          ">
+            $
+          </span>17
+
+          <span style="
+            display:block;
+            font-size:24px;
+            letter-spacing:3px;
+            margin-top:8px;
+            opacity:0.7;
+          ">
+            USD
+          </span>
+
+        </div>
+
+      </div>
+
+      <!-- TEXTO -->
+      <p style="
+        margin-top:20px;
+        font-size:15px;
+        color:#8b5b6b;
+        font-weight:600;
+        letter-spacing:0.4px;
+      ">
+        Oferta disponible hasta el 30 de mayo
+      </p>
+
     </div>
-    <p class="price-note reveal rd3">Este es un taller accesible porque mi misión es llegar a miles de mujeres… pero su valor es mucho mayor.</p>
+
+    <p class="price-note reveal rd3">
+      Este es un taller accesible porque mi misión es llegar a miles de mujeres… 
+      pero su valor es mucho mayor.
+    </p>
+
     <div class="reveal rd4" style="text-align:center;">
-      <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main btn-gold" style="font-size:clamp(14px,1.8vw,17px);">
+
+      <a 
+        href="https://pay.hotmart.com/M105896097J" 
+        target="_blank" 
+        class="btn-main btn-gold" 
+        style="font-size:clamp(14px,1.8vw,17px);"
+      >
         ✦ QUIERO ENTRAR A CÓDIGO RAÍZ ✦
       </a>
+
     </div>
+
   </div>
 </section>
 
