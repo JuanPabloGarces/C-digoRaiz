@@ -6,956 +6,816 @@
 <title>Código Raíz – Reprograma tu vida desde la raíz</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --pink-base:#FADADD;
-  --pink-mid:#F4B8C0;
-  --pink-hot:#E75480;
-  --pink-deep:#C23B6E;
-  --gold:#D4AF37;
-  --gold-light:#F0D060;
-  --text:#2B2B2B;
-  --white:#FFFFFF;
+  --rose:#E8506A;
+  --rose-deep:#C2304F;
+  --rose-light:#FADADD;
+  --gold:#D4A843;
+  --gold-light:#F0CC6A;
+  --cream:#FFF8F4;
+  --dark:#180010;
+  --dark-mid:#2D0018;
+  --text:#1A0010;
+  --body-min: 18px;
 }
 html{scroll-behavior:smooth;}
-body{
-  font-family:'DM Sans',sans-serif;
-  background:var(--white);
-  color:var(--text);
-  overflow-x:hidden;
-  cursor:none;
-}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;font-size:clamp(18px,2.2vw,22px);}
 
-/* CURSOR */
-.cursor{position:fixed;width:12px;height:12px;background:var(--pink-hot);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s;mix-blend-mode:multiply;}
-.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);}
-
-/* GRID BG */
-.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(231,84,128,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(231,84,128,0.035) 1px,transparent 1px);background-size:60px 60px;}
-
-/* ── HERO ── */
+/* ─── HERO ─── */
 .hero{
   min-height:100vh;
-  background:linear-gradient(145deg,#fff5f7 0%,#FADADD 40%,#f7c5d0 75%,#f0b0c0 100%);
+  background:linear-gradient(160deg,#1a0010 0%,#3d0020 35%,#5a1030 65%,#2d0018 100%);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   text-align:center;
-  padding:clamp(60px,10vw,120px) clamp(20px,5vw,80px) clamp(80px,10vw,130px);
+  padding:clamp(60px,8vw,100px) clamp(20px,6vw,80px) clamp(80px,10vw,120px);
   position:relative;overflow:hidden;
 }
-.hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(212,175,55,0.16) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;animation:glow-pulse 4s ease-in-out infinite;}
-@keyframes glow-pulse{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7;}50%{transform:translate(-50%,-50%) scale(1.15);opacity:1;}}
+.hero-glow{position:absolute;width:800px;height:800px;background:radial-gradient(circle,rgba(232,80,106,.22) 0%,rgba(212,168,67,.1) 40%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);animation:pulse 5s ease-in-out infinite;pointer-events:none;}
+@keyframes pulse{0%,100%{transform:translate(-50%,-50%) scale(1);}50%{transform:translate(-50%,-50%) scale(1.2);}}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(232,80,106,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(232,80,106,.06) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
 
-.sparkle{position:absolute;pointer-events:none;animation:sp var(--dur,3s) ease-in-out infinite var(--delay,0s);}
-.sparkle::before{content:'✦';color:var(--gold);font-size:var(--sz,14px);opacity:var(--op,.5);}
-@keyframes sp{0%,100%{opacity:0;transform:scale(.5) rotate(0deg);}50%{opacity:1;transform:scale(1) rotate(180deg);}}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:12px;
+  background:rgba(232,80,106,.15);border:1px solid rgba(232,80,106,.4);
+  padding:14px 32px;border-radius:50px;
+  font-size:clamp(14px,1.8vw,18px);font-weight:700;letter-spacing:.25em;text-transform:uppercase;
+  color:rgba(250,218,221,.9);
+  margin-bottom:clamp(28px,4vw,44px);
+  opacity:0;animation:up .7s .1s forwards;
+}
+.hero-pill span{color:var(--gold);}
+@keyframes up{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:clamp(10px,1.3vw,12px);font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--pink-hot);background:rgba(231,84,128,.08);border:1px solid rgba(231,84,128,.2);padding:8px 22px;border-radius:40px;margin-bottom:clamp(20px,3vw,32px);opacity:0;animation:fadeUp .7s .2s forwards;}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'✦';color:var(--gold);font-size:10px;}
+.hero-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(100px,22vw,260px);
+  line-height:.85;
+  letter-spacing:.02em;
+  color:#fff;
+  opacity:0;animation:up .9s .25s forwards;
+}
+.hero-title .outline{-webkit-text-stroke:2px var(--gold);color:transparent;}
 
-.hero h1{font-family:'Bebas Neue',cursive;font-size:clamp(70px,15vw,200px);line-height:.9;letter-spacing:.02em;color:var(--text);opacity:0;animation:fadeUp .8s .35s forwards;position:relative;}
-.hero h1 .stroke-text{-webkit-text-stroke:2px var(--pink-hot);color:transparent;}
-
-.hero-divider{display:flex;align-items:center;gap:16px;margin:clamp(14px,2vw,24px) 0;opacity:0;animation:fadeUp .7s .5s forwards;}
-.hero-divider::before{content:'';flex:1;max-width:140px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
-.hero-divider::after{content:'';flex:1;max-width:140px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);}
-.hero-divider-icon{color:var(--gold);font-size:14px;}
-
-/* NUEVO TITULAR EMOCIONAL */
-.hero-headline{
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(18px,2.8vw,30px);
+.hero-mid{
+  font-family:'Playfair Display',serif;
   font-style:italic;
-  color:#5a2535;
-  max-width:680px;
-  line-height:1.55;
-  opacity:0;
-  animation:fadeUp .8s .6s forwards;
-  margin-bottom:clamp(10px,1.5vw,18px);
+  font-size:clamp(22px,3.5vw,40px);
+  color:rgba(250,218,221,.8);
+  margin:clamp(20px,3vw,32px) 0;
+  line-height:1.45;
+  opacity:0;animation:up .8s .42s forwards;
+  max-width:700px;
 }
-.hero-headline strong{
-  color:var(--pink-hot);
-  font-style:normal;
+.hero-mid strong{color:var(--gold);font-style:normal;}
+
+.hero-sub{
+  font-size:clamp(18px,2vw,22px);
   font-weight:400;
-}
-
-.hero-sub-tagline{
-  font-family:'DM Sans',sans-serif;
-  font-size:clamp(13px,1.5vw,15px);
-  font-weight:400;
-  color:#8a4055;
-  max-width:560px;
-  line-height:1.65;
-  opacity:0;
-  animation:fadeUp .8s .72s forwards;
-  margin-bottom:clamp(28px,4vw,48px);
-}
-
-.hero-cta{opacity:0;animation:fadeUp .8s .9s forwards;}
-
-.wave-bottom{position:absolute;bottom:-1px;left:0;right:0;line-height:0;}
-.wave-bottom svg{display:block;width:100%;height:auto;}
-
-/* ── BUTTONS ── */
-.btn-main{display:inline-block;background:linear-gradient(135deg,var(--pink-hot) 0%,var(--pink-deep) 50%,#a02055 100%);color:#fff;font-family:'DM Sans',sans-serif;font-size:clamp(13px,1.6vw,16px);font-weight:700;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;padding:clamp(18px,2.5vw,22px) clamp(40px,6vw,70px);border-radius:60px;border:none;cursor:pointer;position:relative;overflow:hidden;box-shadow:0 8px 40px rgba(231,84,128,.5);transition:transform .25s,box-shadow .25s;animation:bpink 2.8s ease-in-out infinite;}
-.btn-main::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.25),transparent);transform:translateX(-100%);transition:transform .5s;}
-.btn-main:hover::before{transform:translateX(100%);}
-.btn-main:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 18px 60px rgba(231,84,128,.65);}
-.btn-main:active{transform:scale(.97);}
-@keyframes bpink{0%,100%{box-shadow:0 8px 40px rgba(231,84,128,.5);}50%{box-shadow:0 8px 60px rgba(231,84,128,.75);}}
-
-.btn-gold{background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 50%,var(--gold) 100%);color:var(--text);box-shadow:0 8px 40px rgba(212,175,55,.5);animation:bgold 2.8s ease-in-out infinite;}
-.btn-gold:hover{box-shadow:0 18px 60px rgba(212,175,55,.65);}
-@keyframes bgold{0%,100%{box-shadow:0 8px 40px rgba(212,175,55,.5);}50%{box-shadow:0 8px 60px rgba(212,175,55,.75);}}
-
-/* ── SECTIONS ── */
-.section{position:relative;overflow:hidden;}
-.section-inner{max-width:1020px;margin:0 auto;padding:clamp(40px,5vw,70px) clamp(20px,5vw,60px);}
-
-.s-label{display:inline-block;font-size:clamp(13px,1.6vw,15px);font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--pink-hot);margin-bottom:12px;}
-.s-title{font-family:'Bebas Neue',cursive;font-size:clamp(36px,7vw,90px);line-height:1;color:var(--text);margin-bottom:clamp(14px,2vw,26px);letter-spacing:.02em;}
-.s-title .accent{color:var(--pink-hot);}
-.s-title .gold{color:var(--gold);}
-.s-ornament{display:flex;align-items:center;gap:14px;margin-bottom:clamp(18px,2.5vw,30px);}
-.s-ornament.center{justify-content:center;}
-.s-ornament::before{content:'';flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,transparent,rgba(231,84,128,.3));}
-.s-ornament::after{content:'';flex:1;max-width:100px;height:1px;background:linear-gradient(90deg,rgba(231,84,128,.3),transparent);}
-.s-ornament span{color:var(--gold);font-size:12px;}
-
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
-.reveal.left{transform:translateX(-28px);}
-.reveal.right{transform:translateX(28px);}
-.reveal.visible{opacity:1!important;transform:translate(0,0)!important;}
-.rd1{transition-delay:.1s;}.rd2{transition-delay:.2s;}.rd3{transition-delay:.3s;}.rd4{transition-delay:.4s;}.rd5{transition-delay:.5s;}.rd6{transition-delay:.6s;}
-
-/* ── VIDEO SECTION ── */
-.video-sec{background:#fff;}
-.video-layout-split-compact{display:flex;align-items:center;justify-content:space-between;gap:clamp(24px,4vw,45px);text-align:left;}
-.video-content-left-compact{flex:1.1;max-width:480px;}
-.video-p-main-compact{font-family:'DM Serif Display',serif;font-size:clamp(15px,1.9vw,18px);font-style:italic;color:#5a2535;line-height:1.6;margin-bottom:20px;}
-.video-bullets-list-compact{list-style:none;padding:0;margin:0;}
-.video-bullets-list-compact li{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;}
-.video-bullets-list-compact li p{font-size:clamp(13px,1.5vw,15px);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.4;color:var(--text);}
-.bullet-star{color:var(--gold);font-weight:bold;font-size:13px;line-height:1;padding-top:2px;}
-.video-frame-right-compact{flex:0.9;display:flex;justify-content:center;align-items:center;}
-.smartphone-frame-container-compact{position:relative;width:100%;max-width:280px;aspect-ratio:9/16;border-radius:34px;overflow:hidden;background:#000;box-shadow:0 20px 50px rgba(0,0,0,0.18);}
-.smartphone-frame-container-compact video{width:100%;height:100%;object-fit:cover;display:block;background:#000;}
-.video-overlay-custom{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,0.15);cursor:pointer;gap:14px;z-index:10;transition:opacity 0.4s ease;}
-.play-ring-custom{width:66px;height:66px;border-radius:50%;border:2px solid rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.35);transition:transform 0.3s;position:relative;padding-left:3px;backdrop-filter:blur(2px);}
-.video-overlay-custom:hover .play-ring-custom{transform:scale(1.06);}
-.video-overlay-custom p{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(13px,1.6vw,15px);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.35);}
-
-/* ── URGENCY BANNER ── */
-.urgency-banner{
-  background:linear-gradient(135deg,#1a0010 0%,#2d0018 100%);
-  text-align:center;
-  padding:clamp(16px,2.5vw,24px) clamp(20px,5vw,60px);
-  position:relative;
-  overflow:hidden;
-}
-.urgency-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 50% 50%,rgba(212,175,55,.12) 0%,transparent 70%);}
-.urgency-banner p{
-  position:relative;
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(15px,2vw,20px);
-  color:rgba(250,218,221,.88);
+  color:rgba(250,218,221,.45);
+  margin-bottom:clamp(40px,5vw,60px);
+  opacity:0;animation:up .8s .55s forwards;
   line-height:1.5;
 }
-.urgency-banner p strong{color:var(--gold);font-style:normal;}
 
-/* ── DETAILS ── */
-.details-sec{background:linear-gradient(160deg,#FADADD 0%,#f7c5d0 100%);position:relative;overflow:hidden;margin-bottom:clamp(32px,5vw,64px);}
-.details-sec::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(231,84,128,.08) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
-.details-sec .section-inner{text-align:center;}
+.hero-cta{opacity:0;animation:up .8s .7s forwards;}
 
-.ev-showcase{display:grid;grid-template-columns:1fr 1fr;gap:0;max-width:960px;margin:clamp(24px,3.5vw,44px) auto 0;border-radius:28px;overflow:hidden;box-shadow:0 40px 100px rgba(100,0,40,.25),0 0 0 1px rgba(231,84,128,.15);}
-.ev-left{background:linear-gradient(155deg,#1a0010 0%,#2d0018 60%,#1a0010 100%);padding:clamp(36px,5vw,56px) clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;}
-.ev-left::before{content:'';position:absolute;width:300px;height:300px;border-radius:50%;border:1px solid rgba(212,175,55,.1);bottom:-80px;left:-60px;}
-.ev-left::after{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(212,175,55,.08);top:-40px;right:-30px;}
-.ev-title-wrap{position:relative;z-index:1;}
-.ev-eyebrow{font-size:11px;font-weight:700;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:16px;display:block;}
-.ev-big-title{font-family:'Bebas Neue',cursive;font-size:clamp(52px,8vw,88px);color:#fff;line-height:.95;letter-spacing:.03em;margin-bottom:12px;}
-.ev-big-title span{display:block;color:var(--gold);}
-.ev-tagline{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(13px,1.6vw,15px);color:rgba(250,218,221,.5);line-height:1.6;max-width:280px;}
-.ev-price-wrap{position:relative;z-index:1;margin-top:clamp(28px,4vw,44px);display:flex;align-items:flex-end;gap:14px;}
-.ev-price-num{font-family:'Bebas Neue',cursive;font-size:clamp(64px,10vw,100px);color:#fff;line-height:1;letter-spacing:-1px;}
-.ev-price-num .ev-dollar{font-size:.45em;vertical-align:super;color:var(--gold);letter-spacing:0;}
-.ev-price-detail{padding-bottom:8px;}
-.ev-price-detail .ep-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);display:block;margin-bottom:2px;}
-.ev-price-detail .ep-cur{font-size:13px;font-weight:700;letter-spacing:.15em;color:var(--gold);opacity:.7;}
-.ev-right{background:linear-gradient(155deg,#fff5f7 0%,#fce8ed 100%);padding:clamp(36px,5vw,56px) clamp(28px,4vw,48px);display:flex;flex-direction:column;justify-content:center;gap:clamp(16px,2.5vw,24px);}
-.ev-row{display:flex;align-items:flex-start;gap:16px;padding-bottom:clamp(14px,2vw,20px);border-bottom:1px solid rgba(231,84,128,.08);}
-.ev-row:last-child{border-bottom:none;padding-bottom:0;}
-.ev-row-icon{width:44px;height:44px;min-width:44px;border-radius:14px;background:linear-gradient(135deg,var(--pink-hot),var(--pink-deep));display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(231,84,128,.3);flex-shrink:0;}
-.ev-row-icon svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
-.ev-row-label{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(43,43,43,.38);display:block;margin-bottom:3px;}
-.ev-row-value{font-family:'DM Serif Display',serif;font-size:clamp(16px,2vw,20px);color:var(--text);font-weight:400;line-height:1.3;}
-.ev-row-sub{font-size:12px;font-weight:300;color:#999;display:block;margin-top:2px;}
-.ev-cta-wrap{margin-top:clamp(4px,1vw,12px);}
-.ev-cta-wrap a{display:block;width:100%;text-align:center;}
-
-/* ── IDENTIFICATION ── */
-.identify-sec{background:#fff;}
-.identify-sec .section-inner{text-align:center;}
-
-/* Frase nueva arriba de identificación */
-.identify-intro{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(16px,2.2vw,22px);
-  color:#5a1030;
-  max-width:600px;
-  margin:0 auto clamp(20px,3vw,36px);
-  line-height:1.7;
+/* ─── BUTTONS ─── */
+.btn{
+  display:inline-block;
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(20px,2.8vw,30px);
+  letter-spacing:.15em;
+  text-decoration:none;
+  padding:clamp(20px,2.8vw,28px) clamp(44px,7vw,88px);
+  border-radius:60px;
+  border:none;cursor:pointer;
+  transition:transform .25s,box-shadow .25s;
+  position:relative;overflow:hidden;
 }
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transform:translateX(-120%);transition:.6s;}
+.btn:hover::before{transform:translateX(120%);}
+.btn:hover{transform:translateY(-3px) scale(1.03);}
 
-.id-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);margin-top:clamp(18px,2.5vw,32px);text-align:left;}
-.id-card{background:linear-gradient(135deg,#fff5f7 0%,#fff 100%);border:1px solid rgba(231,84,128,.1);border-radius:16px;padding:clamp(22px,2.5vw,32px) clamp(18px,2vw,26px);display:flex;align-items:flex-start;gap:16px;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden;}
-.id-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--pink-hot),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .35s;}
-.id-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(231,84,128,.1);border-color:rgba(231,84,128,.22);}
-.id-card:hover::after{transform:scaleX(1);}
-.icon-circle{width:40px;height:40px;min-width:40px;border-radius:12px;background:linear-gradient(135deg,var(--pink-hot),var(--pink-deep));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.icon-circle svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
-.id-card p{font-size:clamp(13px,1.6vw,15px);font-weight:400;line-height:1.6;color:var(--text);padding-top:6px;}
-
-/* ── ROOTS ── */
-.roots-sec{background:linear-gradient(160deg,#FADADD 0%,#f7c5d0 100%);}
-.roots-sec .section-inner{text-align:center;}
-.three-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,28px);margin-top:clamp(18px,2.5vw,36px);}
-.root-card{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid rgba(212,175,55,.3);border-radius:24px;padding:clamp(28px,3.5vw,48px) clamp(20px,2.5vw,32px) clamp(24px,3vw,38px);text-align:center;transition:transform .35s,box-shadow .35s;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:0;}
-.root-card::after{content:'';position:absolute;inset:0;border-radius:24px;background:linear-gradient(135deg,rgba(212,175,55,.08),rgba(231,84,128,.05));opacity:0;transition:opacity .35s;}
-.root-card:hover{transform:translateY(-8px);box-shadow:0 28px 70px rgba(212,175,55,.22);}
-.root-card:hover::after{opacity:1;}
-.root-num{font-family:'Bebas Neue',cursive;font-size:clamp(70px,10vw,110px);color:rgba(212,175,55,.1);line-height:1;margin-bottom:-20px;position:relative;z-index:0;}
-.root-icon-wrap{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--pink-hot) 0%,var(--pink-deep) 100%);box-shadow:0 12px 32px rgba(231,84,128,.35);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative;z-index:1;flex-shrink:0;}
-.root-icon-wrap::before{content:'';position:absolute;width:96px;height:96px;border-radius:50%;border:1.5px solid rgba(231,84,128,.2);}
-.root-icon-wrap svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-.root-card h3{font-family:'Bebas Neue',cursive;font-size:clamp(22px,3vw,30px);color:var(--text);line-height:1.1;letter-spacing:.03em;margin-bottom:10px;position:relative;z-index:1;}
-.root-card p{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(13px,1.5vw,15px);color:#8a4055;line-height:1.65;position:relative;z-index:1;}
-.root-tag{display:inline-block;margin-top:14px;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);background:rgba(212,175,55,.1);border:1px solid rgba(212,175,55,.25);padding:5px 14px;border-radius:20px;position:relative;z-index:1;}
-.roots-close{margin-top:clamp(22px,3vw,36px);font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(18px,2.5vw,26px);color:#5a1030;line-height:1.65;}
-
-/* ── WHAT IS ── */
-.whatis-sec{background:#fff;}
-.whatis-layout{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,80px);align-items:center;}
-.whatis-text .s-title{font-size:clamp(34px,5.5vw,72px);}
-.whatis-desc{font-family:'DM Serif Display',serif;font-size:clamp(16px,2vw,20px);font-style:italic;color:#5a2535;line-height:1.75;margin-bottom:clamp(14px,2vw,22px);}
-.whatis-body{font-size:clamp(14px,1.6vw,16px);font-weight:300;line-height:1.8;color:#555;margin-bottom:clamp(18px,2.5vw,28px);}
-.creator-frame{width:100%;max-width:420px;aspect-ratio:3/4;border-radius:24px;background:linear-gradient(135deg,#FADADD 0%,#f7c5d0 50%,#FADADD 100%);border:1.5px solid rgba(212,175,55,.3);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(231,84,128,.15);margin:0 auto;}
-.creator-frame::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(44,0,20,.35) 100%);z-index:1;}
-.frame-ring{position:absolute;width:120px;height:120px;border-radius:50%;border:1px solid rgba(212,175,55,.25);top:-24px;right:-24px;}
-
-/* ── WHAT YOU WILL LIVE (NUEVA SECCIÓN) ── */
-.live-sec{background:linear-gradient(160deg,#1a0010 0%,#2d0018 60%,#1a0010 100%);position:relative;overflow:hidden;}
-.live-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(212,175,55,.1) 0%,transparent 70%);}
-.live-sec .section-inner{position:relative;text-align:center;}
-.live-sec .s-label{color:var(--gold);opacity:.85;}
-.live-sec .s-title{color:#fff;}
-.live-sec .s-title .accent{color:var(--gold);}
-.live-sec .s-ornament::before,.live-sec .s-ornament::after{background:linear-gradient(90deg,transparent,rgba(212,175,55,.3));}
-
-.live-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:clamp(14px,2vw,22px);
-  margin-top:clamp(20px,3vw,38px);
-  text-align:left;
+.btn-rose{
+  background:linear-gradient(135deg,var(--rose) 0%,var(--rose-deep) 100%);
+  color:#fff;box-shadow:0 10px 50px rgba(232,80,106,.55);
+  animation:roseglow 3s infinite;
 }
+@keyframes roseglow{0%,100%{box-shadow:0 10px 50px rgba(232,80,106,.55);}50%{box-shadow:0 10px 70px rgba(232,80,106,.8);}}
+.btn-rose:hover{box-shadow:0 20px 70px rgba(232,80,106,.75);}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 50%,var(--gold) 100%);
+  color:var(--dark);box-shadow:0 10px 50px rgba(212,168,67,.5);
+  animation:goldglow 3s infinite;
+}
+@keyframes goldglow{0%,100%{box-shadow:0 10px 50px rgba(212,168,67,.5);}50%{box-shadow:0 10px 70px rgba(212,168,67,.75);}}
+.btn-gold:hover{box-shadow:0 20px 70px rgba(212,168,67,.7);}
+
+/* ─── STRIP ─── */
+.strip{
+  background:linear-gradient(90deg,#2d0018,#4a0025,#2d0018);
+  text-align:center;padding:clamp(16px,2.5vw,24px) 20px;
+  border-top:1px solid rgba(212,168,67,.25);border-bottom:1px solid rgba(212,168,67,.25);
+}
+.strip p{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(18px,3vw,28px);
+  letter-spacing:.12em;color:rgba(250,218,221,.85);
+}
+.strip p strong{color:var(--gold);}
+
+/* ─── SECTION COMMONS ─── */
+.sec-wrap{padding:clamp(60px,8vw,110px) clamp(20px,6vw,80px);}
+.sec-label{
+  font-size:clamp(14px,1.8vw,18px);font-weight:700;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--rose);display:block;margin-bottom:16px;
+}
+.sec-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(56px,11vw,120px);
+  line-height:.9;letter-spacing:.02em;color:var(--dark);
+  margin-bottom:clamp(28px,4vw,52px);
+}
+.sec-title .acc{color:var(--rose);}
+.sec-title .gld{color:var(--gold);}
+.sec-center{text-align:center;}
+
+/* ─── VIDEO ─── */
+.video-sec{background:#fff8f4;}
+.video-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:clamp(36px,5vw,72px);}
+.video-text{flex:1.2;}
+.video-h2{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(52px,9vw,100px);
+  line-height:.92;letter-spacing:.02em;color:var(--dark);margin-bottom:24px;
+}
+.video-h2 .acc{color:var(--rose);}
+.video-desc{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(20px,2.5vw,26px);color:#5a2535;line-height:1.6;margin-bottom:30px;
+}
+.video-bullets{list-style:none;}
+.video-bullets li{
+  display:flex;gap:14px;align-items:flex-start;
+  margin-bottom:18px;font-size:clamp(18px,2.2vw,22px);color:#444;line-height:1.5;
+}
+.vb-dot{color:var(--gold);font-weight:700;font-size:20px;flex-shrink:0;padding-top:2px;}
+.video-frame{flex:0.8;display:flex;justify-content:center;}
+.phone{position:relative;width:100%;max-width:280px;aspect-ratio:9/16;border-radius:36px;overflow:hidden;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.3);}
+.phone video{width:100%;height:100%;object-fit:cover;display:block;}
+.phone-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.2);cursor:pointer;gap:14px;z-index:10;transition:opacity .4s;}
+.play-btn{width:70px;height:70px;border-radius:50%;border:2px solid rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.3);backdrop-filter:blur(4px);transition:transform .3s;padding-left:4px;}
+.phone-overlay:hover .play-btn{transform:scale(1.08);}
+.phone-overlay p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,2vw,20px);color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.4);}
+
+/* ─── EVENT DETAILS ─── */
+.ev-sec{
+  background:linear-gradient(160deg,var(--rose-light) 0%,#f7c5d0 50%,var(--rose-light) 100%);
+  position:relative;overflow:hidden;
+}
+.ev-sec::before{content:'';position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(232,80,106,.08) 0%,transparent 70%);top:-100px;right:-100px;pointer-events:none;}
+.ev-inner{max-width:980px;margin:0 auto;}
+.ev-card{
+  background:linear-gradient(160deg,var(--dark) 0%,var(--dark-mid) 100%);
+  border-radius:32px;overflow:hidden;
+  box-shadow:0 50px 120px rgba(26,0,16,.4),0 0 0 1px rgba(232,80,106,.15);
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.ev-price{
+  padding:clamp(44px,5vw,68px) clamp(36px,4vw,56px);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.ev-price::before{content:'';position:absolute;width:400px;height:400px;border-radius:50%;border:1px solid rgba(212,168,67,.1);bottom:-150px;left:-80px;}
+.ev-eyebrow{
+  font-size:clamp(13px,1.6vw,16px);font-weight:700;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(212,168,67,.65);margin-bottom:28px;display:block;position:relative;z-index:1;
+}
+.was-label{
+  font-size:clamp(14px,1.7vw,18px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);display:block;margin-bottom:6px;position:relative;z-index:1;
+}
+.was-price{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(64px,10vw,100px);
+  color:rgba(255,255,255,.18);line-height:1;letter-spacing:-1px;
+  position:relative;display:inline-block;z-index:1;margin-bottom:4px;
+}
+.was-price .dol{font-size:.45em;vertical-align:super;}
+.was-line{
+  position:absolute;left:-8px;right:-8px;top:46%;height:6px;
+  background:rgba(232,80,106,.7);transform:rotate(-4deg);border-radius:4px;
+  box-shadow:0 0 14px rgba(232,80,106,.5);
+}
+.now-label{
+  font-size:clamp(14px,1.7vw,18px);font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.35);display:block;margin-top:20px;margin-bottom:4px;position:relative;z-index:1;
+}
+.now-price{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(110px,18vw,190px);
+  color:#fff;line-height:.85;letter-spacing:-4px;
+  position:relative;z-index:1;display:block;
+}
+.now-price .dol{font-size:.38em;vertical-align:super;color:var(--gold);}
+.now-price .cur{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.18em;letter-spacing:.2em;vertical-align:bottom;padding-bottom:.1em;margin-left:6px;color:rgba(255,255,255,.3);}
+.discount-badge{
+  display:inline-flex;align-items:center;gap:12px;
+  background:linear-gradient(135deg,rgba(232,80,106,.2),rgba(212,168,67,.15));
+  border:1px solid rgba(212,168,67,.35);border-radius:50px;
+  padding:12px 24px;margin-top:22px;position:relative;z-index:1;
+}
+.discount-badge .pct{font-family:'Bebas Neue',cursive;font-size:clamp(24px,3vw,32px);color:var(--gold);letter-spacing:.1em;}
+.discount-badge .info{font-size:clamp(14px,1.7vw,18px);color:rgba(255,255,255,.45);font-weight:700;letter-spacing:.06em;}
+
+.ev-details{
+  background:linear-gradient(160deg,#fff8f4 0%,#fce8ed 100%);
+  padding:clamp(44px,5vw,68px) clamp(36px,4vw,56px);
+  display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,2.5vw,28px);
+}
+.ev-row{display:flex;align-items:flex-start;gap:18px;padding-bottom:clamp(16px,2.2vw,24px);border-bottom:1px solid rgba(232,80,106,.08);}
+.ev-row:last-of-type{border-bottom:none;padding-bottom:0;}
+.ev-icon{width:50px;height:50px;min-width:50px;border-radius:16px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(232,80,106,.35);}
+.ev-icon svg{width:24px;height:24px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.ev-row-lbl{font-size:clamp(12px,1.5vw,15px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(43,43,43,.35);display:block;margin-bottom:4px;}
+.ev-row-val{font-family:'Playfair Display',serif;font-size:clamp(20px,2.5vw,26px);color:var(--dark);line-height:1.25;}
+.ev-row-sub{font-size:clamp(15px,1.8vw,18px);color:#aaa;display:block;margin-top:4px;}
+.ev-cta{margin-top:clamp(6px,1vw,12px);}
+.ev-cta a{display:block;text-align:center;}
+
+/* ─── ROOTS ─── */
+.roots-sec{
+  background:linear-gradient(160deg,var(--dark) 0%,var(--dark-mid) 60%,var(--dark) 100%);
+  position:relative;overflow:hidden;text-align:center;
+}
+.roots-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(212,168,67,.1) 0%,transparent 70%);}
+.roots-sec .sec-label{color:rgba(212,168,67,.8);}
+.roots-sec .sec-title{color:#fff;}
+.roots-sec .sec-title .acc{color:var(--gold);}
+.roots-lead{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(22px,3vw,32px);
+  color:rgba(250,218,221,.7);max-width:700px;margin:0 auto clamp(40px,5vw,68px);line-height:1.6;
+}
+.roots-lead strong{color:var(--gold);font-style:normal;}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(18px,2.5vw,30px);max-width:940px;margin:0 auto;}
+.root-card{
+  background:rgba(255,255,255,.06);border:1px solid rgba(212,168,67,.15);border-radius:24px;
+  padding:clamp(36px,4.5vw,56px) clamp(24px,3vw,38px);
+  transition:transform .35s,background .35s,border-color .35s;position:relative;overflow:hidden;
+}
+.root-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--rose),var(--gold));transform:scaleX(0);transform-origin:left;transition:.4s;}
+.root-card:hover{transform:translateY(-8px);background:rgba(255,255,255,.1);border-color:rgba(212,168,67,.4);}
+.root-card:hover::after{transform:scaleX(1);}
+.root-num{font-family:'Bebas Neue',cursive;font-size:clamp(80px,13vw,130px);color:rgba(212,168,67,.07);line-height:1;margin-bottom:-12px;}
+.root-icon{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--rose-deep));display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 14px 36px rgba(232,80,106,.4);}
+.root-icon svg{width:36px;height:36px;stroke:#fff;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+.root-card h3{font-family:'Bebas Neue',cursive;font-size:clamp(28px,4vw,40px);color:#fff;letter-spacing:.04em;margin-bottom:14px;}
+.root-card p{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(18px,2.2vw,22px);color:rgba(250,218,221,.6);line-height:1.6;}
+.root-tag{display:inline-block;margin-top:20px;font-size:clamp(12px,1.5vw,15px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);background:rgba(212,168,67,.12);border:1px solid rgba(212,168,67,.25);padding:8px 18px;border-radius:20px;}
+.roots-close{font-family:'Bebas Neue',cursive;font-size:clamp(40px,8vw,90px);color:#fff;margin-top:clamp(44px,6vw,80px);letter-spacing:.04em;line-height:1.1;}
+.roots-close .acc{color:var(--rose);}
+
+/* ─── LIVE ─── */
+.live-sec{background:var(--cream);text-align:center;}
+.live-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(32px,4vw,56px);text-align:left;max-width:960px;margin-left:auto;margin-right:auto;}
 .live-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(212,175,55,.15);
-  border-radius:20px;
-  padding:clamp(22px,3vw,32px) clamp(18px,2.5vw,26px);
-  display:flex;
-  align-items:flex-start;
-  gap:14px;
-  transition:background .3s,border-color .3s,transform .3s;
+  background:#fff;border:1px solid rgba(232,80,106,.1);border-radius:22px;
+  padding:clamp(26px,3.5vw,40px) clamp(22px,2.8vw,32px);
+  display:flex;align-items:flex-start;gap:16px;
+  transition:transform .3s,box-shadow .3s;
 }
-.live-card:hover{background:rgba(255,255,255,.09);border-color:rgba(212,175,55,.35);transform:translateY(-4px);}
-.live-bullet{
-  width:36px;height:36px;min-width:36px;
-  border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  font-size:13px;
-  color:var(--text);
-  font-weight:700;
-}
-.live-card p{
-  font-size:clamp(13px,1.5vw,15px);
-  font-weight:400;
-  line-height:1.6;
-  color:rgba(250,218,221,.8);
-  padding-top:6px;
-}
-.live-sessions{
-  margin-top:clamp(24px,3vw,40px);
-  display:inline-flex;
-  align-items:center;
-  gap:14px;
-  background:rgba(212,175,55,.1);
-  border:1px solid rgba(212,175,55,.25);
-  padding:14px 28px;
-  border-radius:50px;
-}
-.live-sessions span{font-family:'Bebas Neue',cursive;font-size:clamp(18px,2.5vw,24px);color:var(--gold);letter-spacing:.05em;}
-.live-sessions p{font-size:clamp(12px,1.5vw,14px);color:rgba(250,218,221,.6);font-weight:300;}
+.live-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(232,80,106,.1);}
+.live-num{font-family:'Bebas Neue',cursive;font-size:clamp(28px,4vw,40px);color:var(--rose);line-height:1;flex-shrink:0;min-width:36px;padding-top:4px;}
+.live-card p{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:#333;font-weight:400;}
 
-/* ── BENEFITS ── */
-.benefits-sec{background:linear-gradient(170deg,#FADADD 0%,#f5c0cc 100%);}
-.benefits-sec .section-inner{text-align:center;}
-.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);margin-top:clamp(18px,2.5vw,32px);text-align:left;}
-.benefit-card{background:rgba(255,255,255,.78);backdrop-filter:blur(8px);border-radius:16px;padding:clamp(20px,2.5vw,28px) clamp(18px,2vw,24px);display:flex;align-items:flex-start;gap:14px;border:1px solid rgba(255,255,255,.9);transition:transform .3s,box-shadow .3s;}
-.benefit-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(231,84,128,.1);}
-.check-gold{width:34px;height:34px;min-width:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(212,175,55,.35);}
-.check-gold svg{width:14px;height:12px;stroke:#2B2B2B;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;}
-.benefit-card p{font-size:clamp(13px,1.5vw,15px);font-weight:400;line-height:1.6;color:var(--text);padding-top:5px;}
-
-/* ── HOW ── */
-.how-sec{background:#fff;}
-.how-sec .section-inner{text-align:center;}
-.how-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,2.5vw,28px);margin-top:clamp(18px,2.5vw,36px);}
-.how-card{background:linear-gradient(160deg,#fff5f7,#fff);border:1px solid rgba(231,84,128,.1);border-radius:20px;padding:clamp(28px,3.5vw,44px) clamp(22px,2.5vw,36px);display:flex;align-items:flex-start;gap:20px;text-align:left;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;}
-.how-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--pink-hot),var(--gold));border-radius:0 2px 2px 0;transform:scaleY(0);transform-origin:top;transition:transform .35s;}
-.how-card:hover{transform:translateY(-4px);box-shadow:0 20px 56px rgba(231,84,128,.1);}
-.how-card:hover::before{transform:scaleY(1);}
-.how-icon-wrap{width:52px;height:52px;min-width:52px;border-radius:16px;border:1.5px solid rgba(231,84,128,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;background:linear-gradient(135deg,#fff5f7,#fff);}
-.how-icon-wrap svg{width:24px;height:24px;stroke:var(--pink-hot);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-.how-text h4{font-family:'DM Serif Display',serif;font-size:clamp(17px,2.2vw,22px);font-weight:400;color:var(--text);margin-bottom:6px;line-height:1.3;}
-.how-text p{font-size:clamp(13px,1.5vw,14px);font-weight:300;color:#888;line-height:1.6;}
-
-/* ── PRICE ── */
-.price-sec{background:#fff;}
-.price-sec .section-inner{text-align:center;}
-.price-hero{margin:clamp(14px,2vw,28px) 0 clamp(18px,2.5vw,32px);}
-.price-label{font-size:clamp(13px,1.5vw,15px);font-weight:400;letter-spacing:.1em;color:#888;margin-bottom:12px;text-transform:uppercase;}
-
-/* Urgencia precio */
-.price-urgency{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:linear-gradient(135deg,rgba(231,84,128,.08),rgba(212,175,55,.06));
-  border:1px solid rgba(231,84,128,.2);
-  border-radius:40px;
-  padding:10px 24px;
-  margin-bottom:clamp(20px,3vw,32px);
-  font-size:clamp(12px,1.4vw,14px);
-  font-weight:700;
-  color:var(--pink-deep);
-  letter-spacing:.05em;
-}
-
-/* ── CIERRE EMOCIONAL ── */
-.closing-sec{background:linear-gradient(160deg,#FADADD 0%,#f5c5d0 50%,#FADADD 100%);position:relative;overflow:hidden;}
-.closing-sec::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.15) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
-.closing-sec .section-inner{text-align:center;position:relative;}
-.closing-text{font-family:'DM Serif Display',serif;font-size:clamp(18px,3vw,32px);font-weight:400;color:#2B2B2B;line-height:1.75;max-width:680px;margin:0 auto clamp(24px,3vw,40px);}
-.closing-text strong{color:var(--pink-hot);font-weight:400;}
-
-/* ── MENSAJE PERSONAL MÓNICA (NUEVA SECCIÓN) ── */
-.monica-sec{
-  background:#fff;
-  position:relative;
-  overflow:hidden;
-}
-.monica-sec::before{
-  content:'';
-  position:absolute;
-  width:400px;height:400px;
-  background:radial-gradient(circle,rgba(231,84,128,.06) 0%,transparent 70%);
-  top:-80px;right:-60px;
-  pointer-events:none;
-}
-.monica-inner{
-  max-width:700px;
-  margin:0 auto;
+/* ─── IDENTIFICACIÓN ─── */
+.id-sec{
+  background:linear-gradient(160deg,var(--rose-light) 0%,#fce8ed 100%);
   text-align:center;
-  position:relative;
 }
-.monica-quote-mark{
-  font-family:'DM Serif Display',serif;
-  font-size:120px;
-  color:rgba(231,84,128,.1);
-  line-height:.7;
-  margin-bottom:-20px;
-  display:block;
+.id-lead{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(22px,3vw,30px);
+  color:#5a1030;max-width:680px;margin:0 auto clamp(36px,4.5vw,56px);line-height:1.65;
 }
-.monica-message{
-  font-family:'DM Serif Display',serif;
-  font-style:italic;
-  font-size:clamp(17px,2.3vw,24px);
-  color:#5a2535;
-  line-height:1.75;
-  margin-bottom:clamp(20px,3vw,32px);
+.id-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(28px,3.5vw,48px);text-align:left;max-width:960px;margin-left:auto;margin-right:auto;}
+.id-card{
+  background:#fff;border:1px solid rgba(232,80,106,.1);border-radius:20px;
+  padding:clamp(26px,3.2vw,38px) clamp(20px,2.5vw,30px);
+  display:flex;align-items:flex-start;gap:16px;
+  transition:transform .3s,border-color .3s;
 }
-.monica-signature{
-  font-family:'DM Serif Display',serif;
+.id-card:hover{transform:translateY(-4px);border-color:rgba(232,80,106,.3);}
+.id-dot{width:40px;height:40px;min-width:40px;border-radius:14px;background:linear-gradient(135deg,var(--rose),var(--rose-deep));display:flex;align-items:center;justify-content:center;}
+.id-dot svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.id-card p{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:#333;padding-top:6px;}
+
+/* ─── BENEFICIOS ─── */
+.ben-sec{background:#fff;text-align:center;}
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:clamp(32px,4vw,52px);text-align:left;max-width:960px;margin-left:auto;margin-right:auto;}
+.ben-card{
+  background:linear-gradient(160deg,#fff5f7,#fff);
+  border:1px solid rgba(232,80,106,.1);border-radius:20px;
+  padding:clamp(26px,3.2vw,38px) clamp(20px,2.5vw,30px);
+  display:flex;align-items:flex-start;gap:16px;
+  transition:transform .3s,box-shadow .3s;
+}
+.ben-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(232,80,106,.1);}
+.ben-check{width:38px;height:38px;min-width:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 14px rgba(212,168,67,.4);}
+.ben-check svg{width:16px;height:14px;stroke:var(--dark);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;}
+.ben-card p{font-size:clamp(18px,2.2vw,22px);line-height:1.55;color:#333;padding-top:6px;}
+
+/* ─── BONOS ─── */
+.bonos-sec{
+  background:linear-gradient(160deg,var(--dark) 0%,var(--dark-mid) 60%,var(--dark) 100%);
+  position:relative;overflow:hidden;text-align:center;
+}
+.bonos-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(212,168,67,.12) 0%,transparent 70%);}
+.bonos-sec .sec-label{color:rgba(212,168,67,.8);}
+.bonos-sec .sec-title{color:#fff;}
+.bonos-sec .sec-title .gld{color:var(--gold);}
+
+.bonos-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,36px);max-width:960px;margin:clamp(32px,4vw,52px) auto 0;text-align:left;}
+.bono-card{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(212,168,67,.25);
+  border-radius:28px;
+  padding:clamp(36px,4.5vw,56px) clamp(28px,3.5vw,44px);
+  position:relative;overflow:hidden;
+  transition:transform .35s,background .35s,border-color .35s;
+}
+.bono-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold));
+}
+.bono-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.09);border-color:rgba(212,168,67,.5);}
+
+.bono-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  color:var(--dark);
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(20px,2.5vw,26px);
+  letter-spacing:.15em;
+  padding:10px 24px;border-radius:50px;
+  margin-bottom:22px;
+  box-shadow:0 8px 24px rgba(212,168,67,.4);
+}
+.bono-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(28px,4vw,44px);
+  color:#fff;line-height:1.05;letter-spacing:.03em;
+  margin-bottom:20px;
+}
+.bono-desc{
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(18px,2.2vw,22px);
+  color:rgba(250,218,221,.65);line-height:1.6;
+  margin-bottom:24px;
+}
+.bono-list{list-style:none;}
+.bono-list li{
+  display:flex;gap:14px;align-items:flex-start;
+  margin-bottom:16px;
+  font-size:clamp(18px,2.2vw,22px);
+  color:rgba(250,218,221,.8);
+  line-height:1.5;
+}
+.bono-star{color:var(--gold);font-size:20px;flex-shrink:0;padding-top:2px;}
+.bono-foot{
+  display:flex;align-items:center;gap:12px;
+  margin-top:26px;
+  padding-top:22px;
+  border-top:1px solid rgba(212,168,67,.15);
+  font-family:'Playfair Display',serif;font-style:italic;
   font-size:clamp(16px,2vw,20px);
-  color:var(--pink-hot);
-  font-style:italic;
+  color:var(--gold);
+  line-height:1.5;
+}
+.bono-spark{font-size:22px;}
+
+/* ─── PRECIO ─── */
+.price-sec{
+  background:linear-gradient(160deg,var(--dark) 0%,var(--dark-mid) 60%,var(--dark) 100%);
+  position:relative;overflow:hidden;text-align:center;
+}
+.price-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(232,80,106,.12) 0%,transparent 70%);}
+.price-inner{max-width:700px;margin:0 auto;position:relative;}
+.price-sec .sec-label{color:rgba(212,168,67,.8);}
+.price-sec .sec-title{color:#fff;font-size:clamp(64px,13vw,140px);}
+.price-sec .sec-title .acc{color:var(--rose);}
+
+.price-was-row{display:flex;align-items:baseline;justify-content:center;gap:14px;margin-top:clamp(24px,3.5vw,40px);}
+.price-was-lbl{font-size:clamp(16px,2vw,22px);font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3);}
+.price-was-num{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(80px,14vw,140px);
+  color:rgba(255,255,255,.18);letter-spacing:-2px;line-height:1;
+  position:relative;display:inline-block;
+}
+.price-was-num .sdol{font-size:.42em;vertical-align:super;}
+.slash{
+  position:absolute;left:-12px;right:-12px;top:45%;height:7px;
+  background:linear-gradient(90deg,transparent,var(--rose),var(--rose),transparent);
+  transform:rotate(-5deg);border-radius:5px;
+  box-shadow:0 0 24px rgba(232,80,106,.7);
+}
+.price-now-big{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(160px,30vw,320px);
+  line-height:.8;letter-spacing:-6px;color:#fff;
+  position:relative;display:block;
+  margin-top:clamp(12px,2vw,22px);
+}
+.price-now-big .pdol{font-size:.35em;vertical-align:super;color:var(--gold);}
+.price-now-big .pusd{font-family:'DM Sans',sans-serif;font-weight:700;font-size:.14em;letter-spacing:.2em;vertical-align:bottom;padding-bottom:.08em;margin-left:8px;color:rgba(255,255,255,.3);}
+.price-discount-row{
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  margin-top:clamp(18px,2.5vw,30px);flex-wrap:wrap;
+}
+.price-pct{
+  font-family:'Bebas Neue',cursive;
+  font-size:clamp(40px,6.5vw,70px);letter-spacing:.1em;color:var(--gold);
+}
+.price-deadline{
+  font-size:clamp(18px,2.2vw,24px);
+  color:rgba(255,255,255,.4);font-weight:700;letter-spacing:.05em;
+}
+.price-deadline strong{color:rgba(232,80,106,.9);}
+.price-cta{margin-top:clamp(36px,5vw,56px);}
+
+/* ─── CLOSING ─── */
+.closing-sec{
+  background:linear-gradient(160deg,var(--rose-light) 0%,#f7c5d0 50%,var(--rose-light) 100%);
+  position:relative;overflow:hidden;text-align:center;
+}
+.closing-sec::before{content:'';position:absolute;width:600px;height:600px;background:radial-gradient(circle,rgba(212,168,67,.18) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.closing-inner{max-width:820px;margin:0 auto;position:relative;}
+.closing-q{font-family:'Playfair Display',serif;font-size:180px;color:rgba(232,80,106,.1);line-height:.7;margin-bottom:-24px;display:block;}
+.closing-text{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,3.8vw,40px);
+  color:#2B2B2B;line-height:1.7;
+  margin-bottom:clamp(36px,5vw,60px);
+}
+.closing-text strong{color:var(--rose);}
+.closing-sig{
+  margin-top:clamp(24px,3vw,36px);
+  font-family:'Playfair Display',serif;font-style:italic;
+  font-size:clamp(20px,2.5vw,28px);color:var(--rose);
 }
 
-/* ── FINAL ── */
-.final-sec{background:linear-gradient(160deg,#1a0010 0%,#2d0018 50%,#1a0010 100%);text-align:center;padding:clamp(60px,9vw,110px) clamp(20px,5vw,60px);position:relative;overflow:hidden;}
-.final-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(212,175,55,.15) 0%,transparent 70%);}
-.final-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,175,55,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(212,175,55,.05) 1px,transparent 1px);background-size:50px 50px;pointer-events:none;}
-.final-brand{position:relative;margin-bottom:clamp(24px,4vw,44px);}
-.final-brand-text{font-family:'Bebas Neue',cursive;font-size:clamp(34px,6.5vw,80px);letter-spacing:.06em;line-height:1;position:relative;display:inline-block;color:transparent;-webkit-text-stroke:1.5px rgba(212,175,55,.5);}
-.final-brand-text::before{content:'MUJER SUPERNOVA';position:absolute;inset:0;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 40%,#fff 55%,var(--gold-light) 70%,var(--gold) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-stroke:0;animation:shimmer-brand 4s linear infinite;background-size:200% auto;}
-@keyframes shimmer-brand{0%{background-position:0% center;}100%{background-position:200% center;}}
-.final-brand-sub{display:block;font-size:clamp(10px,1.4vw,13px);font-weight:700;letter-spacing:.45em;text-transform:uppercase;color:rgba(212,175,55,.45);margin-top:8px;}
-.final-quote{font-family:'Bebas Neue',cursive;font-size:clamp(40px,9vw,120px);line-height:1.05;color:#fff;letter-spacing:.03em;position:relative;max-width:900px;margin:0 auto;}
-.final-quote .line-gold{color:var(--gold);}
-.final-ornament{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:clamp(20px,3vw,36px) auto;}
-.final-footer{font-size:clamp(11px,1.3vw,13px);color:rgba(255,255,255,.25);letter-spacing:.2em;text-transform:uppercase;position:relative;}
+/* ─── FINAL ─── */
+.final{
+  background:linear-gradient(160deg,var(--dark) 0%,var(--dark-mid) 50%,var(--dark) 100%);
+  text-align:center;padding:clamp(56px,8vw,110px) 20px;
+  position:relative;overflow:hidden;
+}
+.final::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 40% at 50% 50%,rgba(212,168,67,.15) 0%,transparent 70%);}
+.final-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(212,168,67,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(212,168,67,.04) 1px,transparent 1px);background-size:60px 60px;}
+.final-inner{position:relative;}
+.brand-text{
+  font-family:'Bebas Neue',cursive;font-size:clamp(40px,7.5vw,96px);letter-spacing:.08em;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 40%,#fff 55%,var(--gold-light) 70%,var(--gold) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shimmer 4s linear infinite;background-size:200% auto;display:block;margin-bottom:10px;
+}
+@keyframes shimmer{0%{background-position:0% center;}100%{background-position:200% center;}}
+.brand-sub{font-size:clamp(13px,1.7vw,18px);font-weight:700;letter-spacing:.38em;text-transform:uppercase;color:rgba(212,168,67,.4);}
+.orn{width:130px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:clamp(24px,3.5vw,40px) auto;}
+.final-quote{
+  font-family:'Bebas Neue',cursive;font-size:clamp(44px,9.5vw,110px);
+  letter-spacing:.03em;color:#fff;line-height:1.1;max-width:860px;margin:0 auto;
+}
+.final-quote .gld{color:var(--gold);}
+.final-footer{font-size:clamp(14px,1.6vw,17px);color:rgba(255,255,255,.2);letter-spacing:.18em;text-transform:uppercase;margin-top:clamp(28px,4vw,52px);}
 
-/* ── STICKY ── */
-.sticky-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(26,0,16,.94);backdrop-filter:blur(16px);border-top:1px solid rgba(212,175,55,.25);padding:12px 20px;z-index:1000;text-align:center;}
-.sticky-bar a{display:block;max-width:420px;margin:0 auto;}
+/* ─── STICKY ─── */
+.sticky{
+  display:none;position:fixed;bottom:0;left:0;right:0;
+  background:rgba(26,0,16,.96);backdrop-filter:blur(16px);
+  border-top:1px solid rgba(212,168,67,.25);
+  padding:14px 20px;z-index:1000;text-align:center;
+}
+.sticky a{display:block;max-width:440px;margin:0 auto;}
 
-/* ── RESPONSIVE ── */
+/* ─── REVEAL ─── */
+.rev{opacity:0;transform:translateY(28px);transition:opacity .75s,transform .75s;}
+.rev.left{transform:translateX(-28px);}
+.rev.in{opacity:1!important;transform:translate(0,0)!important;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}.d4{transition-delay:.4s;}.d5{transition-delay:.5s;}.d6{transition-delay:.6s;}
+
+/* ─── RESPONSIVE ─── */
 @media(max-width:900px){
-  .three-cols{grid-template-columns:1fr 1fr;}
-  .whatis-layout{grid-template-columns:1fr;text-align:center;}
-  .whatis-text{text-align:center;}
-  .whatis-text .s-label,.whatis-text .s-title,.whatis-desc,.whatis-body{text-align:center;}
-  .whatis-text .reveal{transform:translateY(28px);}
-  .creator-frame{width:min(80%,360px);margin:0 auto;}
-  .whatis-img-area{order:-1;}
-  .id-grid{grid-template-columns:1fr 1fr;}
-  .benefits-grid{grid-template-columns:1fr 1fr;}
-  .how-grid{grid-template-columns:1fr 1fr;}
-  .live-grid{grid-template-columns:1fr 1fr;}
-  .ev-showcase{grid-template-columns:1fr;max-width:560px;margin-left:auto;margin-right:auto;}
-  .ev-left{text-align:center;}
-  .ev-title-wrap{display:flex;flex-direction:column;align-items:center;}
-  .ev-tagline{max-width:100%;text-align:center;}
-  .ev-price-wrap{justify-content:center;}
-  .ev-right{text-align:left;}
-  .video-layout-split-compact{flex-direction:column;text-align:center;gap:35px;}
-  .video-content-left-compact{max-width:100%;display:flex;flex-direction:column;align-items:center;}
-  .video-bullets-list-compact li{text-align:left;justify-content:center;}
-  .smartphone-frame-container-compact{max-width:260px;}
+  .ev-card{grid-template-columns:1fr;max-width:580px;margin:0 auto;}
+  .video-inner{flex-direction:column;text-align:center;}
+  .video-text{text-align:center;}
+  .video-frame{order:-1;}
+  .video-bullets li{text-align:left;justify-content:flex-start;}
+  .three,.id-grid,.live-grid,.ben-grid,.bonos-grid{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:600px){
-  .three-cols{grid-template-columns:1fr;}
-  .id-grid{grid-template-columns:1fr;}
-  .benefits-grid{grid-template-columns:1fr;}
-  .how-grid{grid-template-columns:1fr;}
-  .live-grid{grid-template-columns:1fr;}
-  .ev-showcase{max-width:100%;border-radius:20px;}
-  .ev-left{padding:32px 24px;}
-  .ev-right{padding:28px 24px;}
-  .sticky-bar{display:block;}
-  body{padding-bottom:72px;}
-  .cursor,.cursor-ring{display:none;}
-  body{cursor:auto;}
-}
-@media(max-width:480px){
-  .hero h1{font-size:clamp(58px,15vw,100px);}
-  .ev-price-num{font-size:clamp(60px,18vw,90px);}
-  .root-icon-wrap{width:68px;height:68px;}
-  .root-icon-wrap svg{width:30px;height:30px;}
+  .three,.id-grid,.live-grid,.ben-grid,.bonos-grid{grid-template-columns:1fr;}
+  .sticky{display:block;}
+  body{padding-bottom:76px;}
+  .price-now-big{font-size:clamp(140px,36vw,240px);}
+  .closing-q{font-size:120px;}
 }
 </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<div class="cursor" id="cur"></div>
-<div class="cursor-ring" id="curRing"></div>
-
-
-
-<!-- ═══ VIDEO — SUBIDO ARRIBA ═══ -->
-<section class="video-sec section">
-  <div class="section-inner" style="max-width:960px;padding-top:clamp(20px,3vw,40px);padding-bottom:clamp(20px,3vw,40px);">
-    <div class="video-layout-split-compact">
-      <div class="video-content-left-compact reveal visible">
-        <span class="s-label" style="margin-bottom:8px;">Taller en vivo • Online</span>
-        <h2 class="s-title" style="margin-bottom:12px;font-size:clamp(32px,5.5vw,64px);">Algunas decisiones tienen el poder de transformarlo todo</h2>
-        <div class="s-ornament" style="margin-bottom:16px;"><span>✦</span></div>
-        <p class="video-p-main-compact">Cuando una mujer empieza a trabajar en su energía, su mentalidad y su historia interna, muchas cosas comienzan a cambiar a su alrededor. Este puede ser el inicio de una nueva etapa para ti.</p>
-        <ul class="video-bullets-list-compact">
-          <li><span class="bullet-star">✦</span><p>Conecta con una versión más consciente y poderosa de ti.</p></li>
-          <li><span class="bullet-star">✦</span><p>Empieza a romper patrones que han limitado tu crecimiento.</p></li>
-        </ul>
-      </div>
-      <div class="video-frame-right-compact">
-        <div class="smartphone-frame-container-compact">
-          <video id="videoVerticalReal" controls preload="metadata" playsinline
-            poster="https://res.cloudinary.com/dzq6yfplb/video/upload/so_1/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.jpg">
-            <source src="https://res.cloudinary.com/dzq6yfplb/video/upload/q_auto/f_auto/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.mp4" type="video/mp4">
-            Tu navegador no soporta video.
-          </video>
-          <div class="video-overlay-custom" id="customOverlay">
-            <div class="play-ring-custom">
-              <svg width="18" height="22" viewBox="0 0 22 26" fill="none">
-                <path d="M2 2L20 13L2 24V2Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <p>Reproducir video</p>
-          </div>
-        </div>
-      </div>
-    </div>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-pill"><span>✦</span> Taller en vivo · Online · Junio 2026 <span>✦</span></div>
+  <h1 class="hero-title">CÓDIGO<br><span class="outline">RAÍZ</span></h1>
+  <p class="hero-mid">5 días para sanar las tres relaciones<br>que <strong>lo bloquean todo.</strong></p>
+  <p class="hero-sub">Online · En vivo · Desde donde estés</p>
+  <div class="hero-cta">
+    <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-gold">✦ QUIERO MI LUGAR · $17 USD ✦</a>
   </div>
 </section>
 
-<!-- ═══ BANNER DE URGENCIA ═══ -->
-<div class="urgency-banner">
-  <p>🔥 <strong>Precio especial disponible solo por lanzamiento.</strong> Oferta válida hasta el 30 de mayo · Solo $17 USD</p>
+<!-- ─── STRIP ─── -->
+<div class="strip">
+  <p>🔥 <strong>88% DE DESCUENTO</strong> — precio especial solo hasta el <strong>30 de mayo</strong></p>
 </div>
 
-
-<!-- ═══ DETALLES DEL EVENTO ═══ -->
-<section class="section details-sec">
-  <div class="section-inner">
-    <span class="s-label reveal" style="color:var(--pink-deep);">Todo lo que necesitas saber</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">El <span class="accent">evento</span></h2>
-    <div class="ev-showcase reveal rd2">
-      <!-- PANEL IZQUIERDO -->
-      <div class="ev-left">
-        <div class="ev-title-wrap">
-          <span class="ev-eyebrow">✦ Taller en vivo · Online ✦</span>
-          <div class="ev-big-title">CÓDIGO<span>RAÍZ</span></div>
-          <p class="ev-tagline">5 días en vivo para transformar las raíces que bloquean tu vida</p>
-        </div>
-
-        <div style="margin-top:clamp(28px,4vw,44px);position:relative;z-index:1;">
-
-          <span style="display:block;font-size:10px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:12px;">Tu inversión hoy</span>
-
-          <!-- $26 tachado -->
-          <div style="position:relative;display:inline-block;margin-bottom:2px;">
-            <span style="font-family:'Bebas Neue',cursive;font-size:clamp(44px,7vw,72px);line-height:1;color:rgba(255,255,255,.2);letter-spacing:-1px;display:block;position:relative;">
-              <span style="font-size:.42em;vertical-align:super;">$</span>26
-              <span style="position:absolute;left:-4px;right:-4px;top:46%;height:4px;background:rgba(255,255,255,.4);transform:rotate(-7deg);border-radius:6px;display:block;"></span>
-            </span>
+<!-- ═══ VIDEO ═══ -->
+<section class="video-sec sec-wrap">
+  <div class="video-inner">
+    <div class="video-text rev">
+      <span class="sec-label" style="color:var(--rose);">✦ Taller en vivo</span>
+      <h2 class="video-h2">Algunas decisiones<br>lo <span class="acc">cambian todo</span></h2>
+      <p class="video-desc">Cuando una mujer trabaja en su energía, su historia y su mentalidad, todo empieza a cambiar. Este puede ser tu momento.</p>
+      <ul class="video-bullets">
+        <li><span class="vb-dot">✦</span>Conecta con una versión más consciente y poderosa de ti.</li>
+        <li><span class="vb-dot">✦</span>Rompe los patrones que han limitado tu vida desde la raíz.</li>
+      </ul>
+    </div>
+    <div class="video-frame rev d2">
+      <div class="phone">
+        <video id="vid" controls preload="metadata" playsinline
+          poster="https://res.cloudinary.com/dzq6yfplb/video/upload/so_1/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.jpg">
+          <source src="https://res.cloudinary.com/dzq6yfplb/video/upload/q_auto/f_auto/v1779142362/WhatsApp_Video_2026-05-18_at_4.10.41_PM_txkugv.mp4" type="video/mp4">
+        </video>
+        <div class="phone-overlay" id="overlay">
+          <div class="play-btn">
+            <svg width="18" height="22" viewBox="0 0 22 26" fill="none"><path d="M2 2L20 13L2 24V2Z" fill="#FFF" stroke="#FFF" stroke-width="1" stroke-linejoin="round"/></svg>
           </div>
-
-          <!-- $17 grande -->
-          <div style="font-family:'Bebas Neue',cursive;font-size:clamp(88px,15vw,148px);line-height:.88;letter-spacing:-3px;color:#fff;display:block;">
-            <span style="font-size:.38em;vertical-align:super;color:var(--gold);">$</span>17
-            <span style="display:inline-block;font-size:.18em;letter-spacing:.2em;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;font-weight:700;vertical-align:bottom;padding-bottom:8px;margin-left:4px;">USD</span>
-          </div>
-
-          <div style="margin-top:14px;display:flex;flex-direction:column;gap:5px;">
-            <span style="font-family:'Bebas Neue',cursive;font-size:clamp(18px,2.8vw,26px);letter-spacing:.12em;color:var(--gold);">35% DE DESCUENTO</span>
-            <span style="font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.28);">Solo por lanzamiento · hasta el 30 de mayo</span>
-          </div>
-
+          <p>Reproducir video</p>
         </div>
       </div>
-      <!-- PANEL DERECHO -->
-      <div class="ev-right">
-        <div class="ev-row">
-          <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <div class="ev-row-text">
-            <span class="ev-row-label">Fecha de inicio</span>
-            <span class="ev-row-value">22 de junio de 2026</span>
-            <span class="ev-row-sub">Lunes · empieza a las 7pm hora Colombia</span>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EVENT DETAILS ═══ -->
+<section class="ev-sec sec-wrap">
+  <div class="ev-inner">
+    <span class="sec-label rev">✦ Todo lo que necesitas saber</span>
+    <h2 class="sec-title rev d1">El <span class="acc">Evento</span></h2>
+    <div class="ev-card rev d2">
+      <div class="ev-price">
+        <span class="ev-eyebrow">✦ Taller en vivo · Online ✦</span>
+        <span class="was-label">Precio original</span>
+        <div style="position:relative;display:inline-block;">
+          <span class="was-price"><span class="dol">$</span>145<span class="was-line"></span></span>
         </div>
+        <span class="now-label">Tu inversión hoy</span>
+        <span class="now-price"><span class="dol">$</span>17<span class="cur">USD</span></span>
+        <div class="discount-badge">
+          <span class="pct">88% OFF</span>
+          <span class="info">Solo hasta el 30 de mayo</span>
+        </div>
+      </div>
+      <div class="ev-details">
         <div class="ev-row">
-          <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="ev-row-text">
-            <span class="ev-row-label">Duración</span>
-            <span class="ev-row-value">5 días en vivo</span>
-            <span class="ev-row-sub">Sesiones diarias con grabación disponible</span>
-          </div>
+          <div class="ev-icon"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><span class="ev-row-lbl">Fecha de inicio</span><span class="ev-row-val">22 de junio de 2026</span><span class="ev-row-sub">Lunes · 7pm hora Colombia</span></div>
         </div>
         <div class="ev-row">
-          <div class="ev-row-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
-          <div class="ev-row-text">
-            <span class="ev-row-label">Modalidad</span>
-            <span class="ev-row-value">100% Online</span>
-            <span class="ev-row-sub">Desde donde estés, en cualquier dispositivo</span>
-          </div>
+          <div class="ev-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><span class="ev-row-lbl">Duración</span><span class="ev-row-val">5 días en vivo</span><span class="ev-row-sub">Con grabación disponible</span></div>
         </div>
-        <div class="ev-cta-wrap">
-          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main btn-gold" style="padding:16px 28px;font-size:13px;border-radius:50px;">
-            ✦ QUIERO MI LUGAR · $17 USD ✦
-          </a>
+        <div class="ev-row">
+          <div class="ev-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <div><span class="ev-row-lbl">Modalidad</span><span class="ev-row-val">100% Online</span><span class="ev-row-sub">Desde cualquier dispositivo</span></div>
+        </div>
+        <div class="ev-cta">
+          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-gold" style="padding:18px 30px;font-size:clamp(18px,2.2vw,24px);border-radius:50px;">✦ QUIERO MI LUGAR · $17 USD ✦</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ═══ QUÉ ES / SOBRE MÓNICA ═══ -->
-<section class="section whatis-sec">
-  <div class="section-inner">
-    <div class="whatis-layout">
-      <div class="whatis-img-area reveal left rd1" style="display:flex;justify-content:center;">
-        <div class="creator-frame">
-          <div class="frame-ring"></div>
-          <img src="img/Monica-Supernova.png" alt="Mónica Supernova" style="width:100%;height:100%;object-fit:cover;position:relative;z-index:2;">
-        </div>
-      </div>
-      <div class="whatis-text">
-        <span class="s-label reveal">El taller</span>
-        <h2 class="s-title reveal rd1">¿Qué es<br><span class="accent">Código</span><br><span class="gold">Raíz?</span></h2>
-        <p class="whatis-desc reveal rd2">Un taller en vivo de 5 días donde vas a sanar las tres relaciones más importantes de tu vida.</p>
-        <p class="whatis-body reveal rd3">Porque cuando sanas estas tres áreas… empiezas a desbloquear tu vida completa. Esto no es solo información — es transformación real, profunda y duradera.</p>
-        <div class="reveal rd4">
-          <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main">✦ QUIERO EMPEZAR MI TRANSFORMACIÓN ✦</a>
-        </div>
-      </div>
+<!-- ═══ ROOTS ═══ -->
+<section class="roots-sec sec-wrap">
+  <span class="sec-label rev">La verdad que necesitas escuchar</span>
+  <h2 class="sec-title rev d1 sec-center">La <span class="acc">raíz</span> de todo</h2>
+  <p class="roots-lead rev d2">La mayoría de los problemas de hoy<br><strong>no empezaron hoy.</strong><br>Viven en tus relaciones más importantes.</p>
+  <div class="three">
+    <div class="root-card rev d1">
+      <div class="root-num">01</div>
+      <div class="root-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+      <h3>Tu niña interior</h3>
+      <p>Las heridas de la infancia siguen dictando tus decisiones de adulta sin que lo notes.</p>
+      <span class="root-tag">✦ Sanación profunda</span>
+    </div>
+    <div class="root-card rev d2">
+      <div class="root-num">02</div>
+      <div class="root-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+      <h3>Mamá y Papá</h3>
+      <p>La relación con tus padres influye directamente en cómo amas, recibes y te valoras.</p>
+      <span class="root-tag">✦ Reconciliación</span>
+    </div>
+    <div class="root-card rev d3">
+      <div class="root-num">03</div>
+      <div class="root-icon"><svg viewBox="0 0 24 24"><path d="M12 22s-8-6.5-8-12a8 8 0 0 1 16 0c0 5.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></div>
+      <h3>Contigo misma</h3>
+      <p>Tu amor propio y cómo te tratas son el reflejo de todo lo que atraes a tu vida.</p>
+      <span class="root-tag">✦ Amor propio real</span>
     </div>
   </div>
+  <p class="roots-close rev d4">Si esas tres relaciones no están sanas…<br><span class="acc">tu vida se bloquea.</span></p>
 </section>
 
-
-
-
-<!-- ═══ RAÍZ ═══ -->
-<section class="section roots-sec">
-  <div class="section-inner">
-    <span class="s-label reveal" style="color:var(--pink-deep);">La verdad que necesitas escuchar</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">La <span class="accent">raíz</span> de todo está<br>en tres relaciones</h2>
-    <div class="s-ornament center reveal rd2"><span>✦</span></div>
-    <p class="reveal rd2" style="text-align:center;font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(16px,2.2vw,22px);color:#5a1030;max-width:580px;margin:0 auto clamp(12px,1.5vw,20px);line-height:1.7;">
-      La mayoría de los problemas que hoy tienes en tu vida <strong>no empezaron hoy.</strong><br>Vienen de tu historia, de cómo aprendiste a amar, de lo que viviste en tu infancia.
-    </p>
-    <div class="three-cols">
-      <div class="root-card reveal rd2">
-        <div class="root-num">01</div>
-        <div class="root-icon-wrap">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/><path d="M12 12v3"/></svg>
-        </div>
-        <h3>Tu niña interior</h3>
-        <p>Las heridas de la infancia viven en ti y siguen dictando tus decisiones de adulta sin que lo notes.</p>
-        <span class="root-tag">✦ Sanación profunda</span>
-      </div>
-      <div class="root-card reveal rd3">
-        <div class="root-num">02</div>
-        <div class="root-icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3>Mamá y Papá</h3>
-        <!-- TEXTO ACORTADO -->
-        <p>La relación con tus padres influye directamente en cómo amas, recibes y te valoras.</p>
-        <span class="root-tag">✦ Reconciliación</span>
-      </div>
-      <div class="root-card reveal rd4">
-        <div class="root-num">03</div>
-        <div class="root-icon-wrap">
-          <svg viewBox="0 0 24 24"><path d="M12 22s-8-6.5-8-12a8 8 0 0 1 16 0c0 5.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <h3>Contigo misma</h3>
-        <p>Tu amor propio, tu autoestima y cómo te tratas son el reflejo directo de todo lo que atraes a tu vida.</p>
-        <span class="root-tag">✦ Amor propio real</span>
-      </div>
-    </div>
-    <p class="roots-close reveal rd4">
-      Si esas tres relaciones no están sanas…<br>
-      <strong style="color:var(--pink-hot);">tu vida se bloquea.</strong>
-    </p>
+<!-- ═══ QUÉ VAS A VIVIR ═══ -->
+<section class="live-sec sec-wrap">
+  <span class="sec-label rev" style="color:var(--rose);">Dentro del taller</span>
+  <h2 class="sec-title rev d1 sec-center" style="font-size:clamp(56px,11vw,120px);">Qué vas a <span class="acc">vivir</span></h2>
+  <div class="live-grid">
+    <div class="live-card rev d1"><div class="live-num">01</div><p>Ejercicios guiados de sanación emocional</p></div>
+    <div class="live-card rev d2"><div class="live-num">02</div><p>Reprogramación mental y neuroplasticidad</p></div>
+    <div class="live-card rev d3"><div class="live-num">03</div><p>Herramientas prácticas para aplicar en tu vida</p></div>
+    <div class="live-card rev d4"><div class="live-num">04</div><p>Liberación emocional profunda</p></div>
+    <div class="live-card rev d5"><div class="live-num">05</div><p>Espacios de reflexión y transformación real</p></div>
+    <div class="live-card rev d6"><div class="live-num">06</div><p>Grabaciones de cada sesión incluidas</p></div>
   </div>
 </section>
-
-<!-- ═══ NUEVA SECCIÓN: QUÉ VAS A VIVIR DENTRO DEL TALLER ═══ -->
-<section class="section live-sec">
-  <div class="section-inner">
-    <span class="s-label reveal">Dentro del taller</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Qué vas a <span class="accent">vivir</span></h2>
-    <div class="s-ornament center reveal rd2"><span>✦</span></div>
-    <div class="live-grid">
-      <div class="live-card reveal rd1">
-        <div class="live-bullet">✦</div>
-        <p>Ejercicios guiados de sanación emocional</p>
-      </div>
-      <div class="live-card reveal rd2">
-        <div class="live-bullet">✦</div>
-        <p>Reprogramación mental y neuroplasticidad</p>
-      </div>
-      <div class="live-card reveal rd3">
-        <div class="live-bullet">✦</div>
-        <p>Herramientas prácticas para aplicar en tu vida</p>
-      </div>
-      <div class="live-card reveal rd4">
-        <div class="live-bullet">✦</div>
-        <p>Procesos de liberación emocional profunda</p>
-      </div>
-      <div class="live-card reveal rd5">
-        <div class="live-bullet">✦</div>
-        <p>Espacios de reflexión y transformación real</p>
-      </div>
-      <div class="live-card reveal rd6">
-        <div class="live-bullet">✦</div>
-        <p>Acceso a grabaciones de cada sesión</p>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:clamp(28px,4vw,44px);" class="reveal rd4">
-      <div class="live-sessions">
-        <span>5 ENCUENTROS EN VIVO</span>
-        <p>+ grabaciones disponibles</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 
 <!-- ═══ IDENTIFICACIÓN ═══ -->
-<section class="section identify-sec">
-  <div class="section-inner">
-    <!-- FRASE NUEVA ARRIBA DE LA SECCIÓN -->
-    <p class="identify-intro reveal">
-      Muchas mujeres trabajan en sí mismas…<br>
-      pero siguen repitiendo los mismos patrones porque la raíz sigue intacta.
-    </p>
-    <span class="s-label reveal">¿Te reconoces aquí?</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Esto es para ti si<span class="accent">…</span></h2>
-    <div class="s-ornament center reveal rd2"><span>✦</span></div>
-    <div class="id-grid">
-      <div class="id-card reveal rd1">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/></svg></div>
-        <p>Repites los mismos patrones en el amor o el dinero</p>
-      </div>
-      <div class="id-card reveal rd2">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="3"/></svg></div>
-        <p>Das mucho y recibes poco en tus relaciones</p>
-      </div>
-      <div class="id-card reveal rd3">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
-        <p>Te cuesta poner límites con las personas que amas</p>
-      </div>
-      <div class="id-card reveal rd4">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div>
-        <p>Sientes que algo te bloquea pero no sabes qué es</p>
-      </div>
-      <div class="id-card reveal rd5">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M12 22s-8-6.5-8-12a8 8 0 0 1 16 0c0 5.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></div>
-        <p>Has trabajado en ti… pero no ves cambios reales</p>
-      </div>
-      <div class="id-card reveal rd6">
-        <div class="icon-circle"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
-        <p>No avanzas como quisieras aunque lo intentas todo</p>
-      </div>
-    </div>
+<section class="id-sec sec-wrap">
+  <span class="sec-label rev" style="color:var(--rose-deep);">¿Te reconoces aquí?</span>
+  <h2 class="sec-title rev d1 sec-center" style="font-size:clamp(56px,11vw,120px);">Esto es para ti si<span class="acc">…</span></h2>
+  <p class="id-lead rev d2">Muchas mujeres trabajan en sí mismas…<br>pero siguen repitiendo los mismos patrones<br>porque la raíz sigue intacta.</p>
+  <div class="id-grid">
+    <div class="id-card rev d1"><div class="id-dot"><svg viewBox="0 0 24 24"><path d="M12 21C12 21 3 14 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 6-9 13-9 13z"/></svg></div><p>Repites los mismos patrones en el amor o el dinero</p></div>
+    <div class="id-card rev d2"><div class="id-dot"><svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div><p>Das mucho y recibes poco en tus relaciones</p></div>
+    <div class="id-card rev d3"><div class="id-dot"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div><p>Te cuesta poner límites con las personas que amas</p></div>
+    <div class="id-card rev d4"><div class="id-dot"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg></div><p>Sientes que algo te bloquea pero no sabes qué es</p></div>
+    <div class="id-card rev d5"><div class="id-dot"><svg viewBox="0 0 24 24"><path d="M12 22s-8-6.5-8-12a8 8 0 0 1 16 0c0 5.5-8 12-8 12z"/><circle cx="12" cy="10" r="3"/></svg></div><p>Has trabajado en ti… pero no ves cambios reales</p></div>
+    <div class="id-card rev d6"><div class="id-dot"><svg viewBox="0 0 24 24"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div><p>No avanzas aunque lo intentas todo</p></div>
   </div>
 </section>
 
 <!-- ═══ BENEFICIOS ═══ -->
-<section class="section benefits-sec">
-  <div class="section-inner">
-    <span class="s-label reveal" style="color:var(--pink-deep);">Tu transformación</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Lo que vas a <span class="accent">transformar</span><br>en tu vida</h2>
-    <div class="s-ornament center reveal rd2"><span>✦</span></div>
-    <div class="benefits-grid">
-      <div class="benefit-card reveal rd1"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Entender qué está bloqueando tu vida desde la raíz</p></div>
-      <div class="benefit-card reveal rd2"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Liberar cargas emocionales del pasado</p></div>
-      <div class="benefit-card reveal rd3"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Sanar heridas de infancia de forma profunda</p></div>
-      <div class="benefit-card reveal rd4"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Transformar tu relación con tus padres</p></div>
-      <div class="benefit-card reveal rd5"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Sentirte más segura, en paz y en control de tu vida</p></div>
-      <div class="benefit-card reveal rd6"><div class="check-gold"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Abrirte a recibir más amor, abundancia y bienestar</p></div>
+<section class="ben-sec sec-wrap">
+  <span class="sec-label rev" style="color:var(--rose);">Tu transformación</span>
+  <h2 class="sec-title rev d1 sec-center" style="font-size:clamp(56px,11vw,120px);">Lo que vas a <span class="acc">transformar</span></h2>
+  <div class="ben-grid">
+    <div class="ben-card rev d1"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Entender qué está bloqueando tu vida desde la raíz</p></div>
+    <div class="ben-card rev d2"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Liberar cargas emocionales del pasado</p></div>
+    <div class="ben-card rev d3"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Sanar heridas de infancia de forma profunda</p></div>
+    <div class="ben-card rev d4"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Transformar tu relación con tus padres</p></div>
+    <div class="ben-card rev d5"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Sentirte más segura, en paz y en control</p></div>
+    <div class="ben-card rev d6"><div class="ben-check"><svg viewBox="0 0 14 12"><path d="M1 6L5 10L13 1"/></svg></div><p>Abrirte a recibir más amor, abundancia y bienestar</p></div>
+  </div>
+</section>
+
+<!-- ═══ BONOS ═══ -->
+<section class="bonos-sec sec-wrap">
+  <span class="sec-label rev">Al comprar hoy recibes</span>
+  <h2 class="sec-title rev d1 sec-center" style="font-size:clamp(56px,11vw,120px);">Bonos <span class="gld">exclusivos</span></h2>
+  <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(20px,2.8vw,28px);color:rgba(250,218,221,.6);max-width:600px;margin:0 auto;line-height:1.6;" class="rev d2">
+    Solo para quienes se inscriban durante el lanzamiento.
+  </p>
+
+  <div class="bonos-grid">
+    <!-- BONO 1 -->
+    <div class="bono-card rev d2">
+      <div class="bono-badge">🌸 BONO #1</div>
+      <h3 class="bono-title">ACTIVACIÓN DE<br>ENERGÍA FEMENINA<br>Y MAGNETISMO</h3>
+      <p class="bono-desc">Una experiencia especial donde aprenderás a reconectar con tu poder femenino más profundo.</p>
+      <ul class="bono-list">
+        <li><span class="bono-star">✦</span>Reconectar con tu energía femenina</li>
+        <li><span class="bono-star">✦</span>Sentirte más segura, atractiva y magnética</li>
+        <li><span class="bono-star">✦</span>Elevar tu autoestima y tu merecimiento</li>
+        <li><span class="bono-star">✦</span>Dejar de perseguir amor y empezar a atraerlo</li>
+        <li><span class="bono-star">✦</span>Activar una energía más poderosa y consciente</li>
+      </ul>
+      <div class="bono-foot">
+        <span class="bono-spark">✨</span>
+        Para que vuelvas a sentirte valiosa, deseada y en conexión contigo misma.
+      </div>
+    </div>
+
+    <!-- BONO 2 -->
+    <div class="bono-card rev d3">
+      <div class="bono-badge">🎁 BONO #2</div>
+      <h3 class="bono-title">HIPNOSIS PARA<br>MANIFESTAR<br>ABUNDANCIA</h3>
+      <p class="bono-desc">Una experiencia guiada para reprogramar tu subconsciente y abrirte a recibir prosperidad.</p>
+      <ul class="bono-list">
+        <li><span class="bono-star">✦</span>Reprogramar creencias de escasez</li>
+        <li><span class="bono-star">✦</span>Liberar bloqueos emocionales con el dinero</li>
+        <li><span class="bono-star">✦</span>Abrirte a recibir más prosperidad y oportunidades</li>
+        <li><span class="bono-star">✦</span>Manifestar desde el merecimiento, no la carencia</li>
+        <li><span class="bono-star">✦</span>Conectar con una energía más abundante</li>
+      </ul>
+      <div class="bono-foot">
+        <span class="bono-spark">✨</span>
+        Porque la abundancia también se construye desde tu subconsciente.
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:clamp(36px,5vw,60px);" class="rev d4">
+    <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-gold">✦ QUIERO MIS BONOS + EL TALLER ✦</a>
+  </div>
+</section>
+
+<!-- ═══ PRECIO GRANDE ═══ -->
+<section class="price-sec sec-wrap">
+  <div class="price-inner">
+    <span class="sec-label rev">Tu inversión</span>
+    <h2 class="sec-title rev d1">Accede <span class="acc">hoy</span></h2>
+    <div class="price-was-row rev d2">
+      <span class="price-was-lbl">Antes</span>
+      <span class="price-was-num"><span class="sdol">$</span>145<span class="slash"></span></span>
+    </div>
+    <span class="price-now-big rev d2"><span class="pdol">$</span>17<span class="pusd">USD</span></span>
+    <div class="price-discount-row rev d3">
+      <span class="price-pct">88% DE DESCUENTO</span>
+      <span class="price-deadline">Solo hasta el <strong>30 de mayo</strong></span>
+    </div>
+    <div class="price-cta rev d4">
+      <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-rose">✦ QUIERO EMPEZAR MI TRANSFORMACIÓN ✦</a>
     </div>
   </div>
 </section>
 
-<!-- ═══ CÓMO ═══ -->
-<section class="section how-sec">
-  <div class="section-inner">
-    <span class="s-label reveal">La metodología</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Cómo <span class="accent">lo vamos</span><br>a hacer</h2>
-    <div class="s-ornament center reveal rd2"><span>✦</span></div>
-    <p class="reveal rd2" style="text-align:center;font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(16px,2vw,20px);color:#8a3050;max-width:500px;margin:0 auto clamp(14px,2vw,28px);">
-      Este no es un taller solo de información. Vamos a generar <strong>cambios reales.</strong>
-    </p>
-    <div class="how-grid">
-      <div class="how-card reveal rd1">
-        <div class="how-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M18 2v6h6"/></svg></div>
-        <div class="how-text"><h4>Sanación emocional guiada</h4><p>Procesos profundos para liberar lo que cargas en silencio</p></div>
-      </div>
-      <div class="how-card reveal rd2">
-        <div class="how-icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <div class="how-text"><h4>Ejercicios prácticos profundos</h4><p>Herramientas que puedes aplicar en tu vida inmediatamente</p></div>
-      </div>
-      <div class="how-card reveal rd3">
-        <div class="how-icon-wrap"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-        <div class="how-text"><h4>Reprogramación mental</h4><p>Cambia las creencias que te limitan desde adentro</p></div>
-      </div>
-      <div class="how-card reveal rd4">
-        <div class="how-icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div class="how-text"><h4>Neuroplasticidad y conexión interna</h4><p>Ciencia y espiritualidad para generar cambios reales y duraderos</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ PRECIO + CTA ═══ -->
-<section class="section price-sec">
-  <div class="section-inner">
-    <span class="s-label reveal">Tu inversión</span>
-    <h2 class="s-title reveal rd1" style="text-align:center;">Accede hoy</h2>
-
-    <div class="price-hero reveal rd2">
-      <p class="price-label">Oferta especial</p>
-
-      <!-- PRECIO ANTERIOR TACHADO -->
-      <div style="margin-top:10px;text-align:center;">
-        <div style="font-size:82px;font-weight:800;line-height:1;color:#c06b86;position:relative;letter-spacing:-3px;opacity:0.55;display:inline-block;">
-          <span style="position:relative;display:inline-block;">
-            <span style="position:absolute;left:-10px;right:-10px;top:50%;height:6px;background:#ff4f7a;transform:rotate(-6deg);border-radius:10px;box-shadow:0 0 14px rgba(255,79,122,0.45);"></span>
-            <span style="font-size:40px;vertical-align:top;">$</span>26.00
-          </span>
-        </div>
-      </div>
-
-      <!-- PRECIO ACTUAL -->
-      <div style="margin-top:8px;text-align:center;">
-        <div style="font-size:118px;font-weight:900;line-height:0.9;color:#111;letter-spacing:-5px;display:inline-block;">
-          <span style="font-size:56px;vertical-align:top;">$</span>17
-          <span style="display:block;font-size:24px;letter-spacing:3px;margin-top:8px;opacity:0.7;">USD</span>
-        </div>
-      </div>
-
-      <!-- DESCUENTO + FECHA -->
-      <div style="margin-top:24px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;">
-        <span style="
-          font-family:'Bebas Neue',cursive;
-          font-size:clamp(22px,4vw,36px);
-          letter-spacing:.15em;
-          color:var(--pink-hot);
-          display:block;
-        ">35% DE DESCUENTO</span>
-        <span style="
-          font-size:clamp(12px,1.5vw,15px);
-          font-weight:600;
-          color:#8b5b6b;
-          letter-spacing:.05em;
-        ">Precio especial solo por lanzamiento · válido hasta el 30 de mayo</span>
-      </div>
-    </div>
-
-    <div class="reveal rd4" style="text-align:center;">
-      <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main btn-gold" style="font-size:clamp(14px,1.8vw,17px);">
-        ✦ QUIERO EMPEZAR MI TRANSFORMACIÓN ✦
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ═══ CIERRE EMOCIONAL ═══ -->
-<section class="section closing-sec">
-  <div class="section-inner">
-    <span class="s-label reveal" style="color:var(--pink-deep);">Para ti</span>
-    <div class="s-ornament center reveal rd1"><span>✦</span></div>
-    <p class="closing-text reveal rd2">
+<!-- ═══ CIERRE ═══ -->
+<section class="closing-sec sec-wrap">
+  <div class="closing-inner">
+    <span class="closing-q rev">"</span>
+    <p class="closing-text rev d1">
       Tu vida no está bloqueada por casualidad.<br><br>
       Hay una <strong>historia que necesita ser sanada</strong>…<br>
-      y esa historia vive en tus relaciones más importantes.<br><br>
-      Este puede ser el momento en que<br>
-      <strong>todo empiece a cambiar.</strong>
+      y ese momento puede ser ahora.
     </p>
-    <div class="reveal rd3" style="text-align:center;">
-      <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main">✦ QUIERO ENTRAR A CÓDIGO RAÍZ</a>
+    <div class="rev d2">
+      <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-rose">✦ QUIERO ENTRAR A CÓDIGO RAÍZ ✦</a>
     </div>
-  </div>
-</section>
-
-<!-- ═══ NUEVA SECCIÓN: MENSAJE PERSONAL DE MÓNICA ═══ -->
-<section class="section monica-sec">
-  <div class="section-inner">
-    <div class="monica-inner">
-      <span class="monica-quote-mark reveal">"</span>
-      <p class="monica-message reveal rd1">
-        Yo también sé lo que es sentirse bloqueada, repetir patrones y no entender por qué.<br><br>
-        Código Raíz nació desde mi propio proceso de transformación y desde el deseo profundo de ayudar a más mujeres a sanar desde adentro.
-      </p>
-      <p class="monica-signature reveal rd2">Con amor,<br>Mónica</p>
-      <div style="margin-top:clamp(28px,4vw,44px);" class="reveal rd3">
-        <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main">✦ QUIERO SANAR DESDE LA RAÍZ ✦</a>
-      </div>
-    </div>
+    <p class="closing-sig rev d3">Con amor, Mónica</p>
   </div>
 </section>
 
 <!-- ═══ FINAL ═══ -->
-<section class="final-sec">
+<section class="final">
   <div class="final-grid"></div>
-  <div class="final-brand reveal">
-    <span class="final-brand-text">MUJER SUPERNOVA</span>
-    <span class="final-brand-sub">✦ reprograma tu vida desde la raíz ✦</span>
+  <div class="final-inner">
+    <span class="brand-text rev">MUJER SUPERNOVA</span>
+    <span class="brand-sub rev d1">✦ reprograma tu vida desde la raíz ✦</span>
+    <div class="orn rev d2"></div>
+    <blockquote class="final-quote rev d2">Cuando sanas tu raíz…<br><span class="gld">todo en tu vida cambia.</span></blockquote>
+    <div class="orn rev d3"></div>
+    <p class="final-footer rev d4">© 2026 Código Raíz · Mujer Supernova · Todos los derechos reservados</p>
   </div>
-  <div class="final-ornament reveal"></div>
-  <blockquote class="final-quote reveal rd1">
-    Cuando sanas tu raíz…<br><span class="line-gold">todo en tu vida cambia.</span>
-  </blockquote>
-  <div class="final-ornament reveal rd2"></div>
-  <p class="final-footer reveal rd3">© 2026 Código Raíz · Mujer Supernova · Todos los derechos reservados</p>
 </section>
 
 <!-- STICKY MOBILE -->
-<div class="sticky-bar" id="stickyBar">
-  <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn-main btn-gold" style="padding:13px 28px;font-size:13px;border-radius:50px;">
-    ✦ QUIERO ENTRAR · $17 USD ✦
-  </a>
+<div class="sticky" id="sticky">
+  <a href="https://pay.hotmart.com/M105896097J" target="_blank" class="btn btn-gold" style="padding:14px 30px;font-size:clamp(18px,2.5vw,22px);border-radius:50px;">✦ ENTRAR · $17 USD ✦</a>
 </div>
 
 <script>
-// Custom cursor
-const cur=document.getElementById('cur'),curR=document.getElementById('curRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function anim(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(anim);})();
-document.querySelectorAll('a,button,.id-card,.root-card,.benefit-card,.how-card,.ev-row,.live-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cur.style.width='20px';cur.style.height='20px';curR.style.width='50px';curR.style.height='50px';});
-  el.addEventListener('mouseleave',()=>{cur.style.width='12px';cur.style.height='12px';curR.style.width='36px';curR.style.height='36px';});
-});
+const ro = new IntersectionObserver(es => {
+  es.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); }});
+},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.rev').forEach(el => ro.observe(el));
 
-// Scroll reveal
-const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -30px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+const overlay = document.getElementById('overlay');
+const vid = document.getElementById('vid');
+if(overlay && vid){
+  overlay.addEventListener('click', () => { overlay.style.opacity='0'; overlay.style.pointerEvents='none'; vid.play(); });
+  vid.addEventListener('pause', () => { if(!vid.ended){ overlay.style.opacity='1'; overlay.style.pointerEvents='all'; }});
+}
 
-// Sticky hide near CTA sections
-const sb=document.getElementById('stickyBar');
-const ho=new IntersectionObserver(es=>{
-  const v=es.some(e=>e.isIntersecting);
-  sb.style.opacity=v?'0':'1';sb.style.pointerEvents=v?'none':'all';sb.style.transition='opacity .3s';
+const st = document.getElementById('sticky');
+const ho = new IntersectionObserver(es => {
+  const v = es.some(e => e.isIntersecting);
+  st.style.opacity = v ? '0' : '1';
+  st.style.pointerEvents = v ? 'none' : 'all';
+  st.style.transition = 'opacity .3s';
 },{threshold:.1});
-['.price-sec','.closing-sec','.monica-sec'].forEach(s=>{const el=document.querySelector(s);if(el)ho.observe(el);});
-
-// Video overlay
-document.addEventListener('DOMContentLoaded',function(){
-  const overlayVideo=document.getElementById('customOverlay');
-  const videoElemento=document.getElementById('videoVerticalReal');
-  if(overlayVideo&&videoElemento){
-    overlayVideo.addEventListener('click',function(){
-      overlayVideo.style.opacity='0';
-      overlayVideo.style.pointerEvents='none';
-      videoElemento.play();
-    });
-    videoElemento.addEventListener('pause',function(){
-      if(!videoElemento.ended){
-        overlayVideo.style.opacity='1';
-        overlayVideo.style.pointerEvents='all';
-      }
-    });
-  }
-});
-
-// Parallax sparkles
-const spks=document.querySelectorAll('.sparkle');
-document.addEventListener('mousemove',e=>{
-  const cx=window.innerWidth/2,cy=window.innerHeight/2,dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
-  spks.forEach((s,i)=>{const d=(i%3+1)*6;s.style.transform=`translate(${dx*d}px,${dy*d}px)`;});
-});
+['.price-sec','.closing-sec'].forEach(s => { const el = document.querySelector(s); if(el) ho.observe(el); });
 </script>
 </body>
 </html>
